@@ -5,17 +5,25 @@
         @csrf
         <div class="container-fluid flex-grow-1 container-p-y d-flex align-items-center">
             <div class="container">
-                <div class="card mb-3">
-                    <div class="card-body d-flex align-items-center mt-3">
-                        <h2 class="bold text-dark">Detail Buku</h2>
-                    </div>
+                <div class="card mb-3 border border-1 rounded-5 border-primary">
+                    <h2 class="text-primary fw-bold d-flex align-items-center mt-3 ms-2"><i style="font-size: 30px;"
+                            class='bx bxs-book-open ms-1 me-1'> </i>Detail Buku
+                    </h2>
                 </div>
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col col-md-4"><img class ="img-fluid mt-3"
                                     src="{{ asset('page_image/canva-brown-rusty-mystery-novel-book-cover-hG1QhA7BiBU.jpg') }}"
-                                    alt=""></div>
+                                    alt="">
+                                <div class="d-flex justify-content-center mt-3">
+                                    <i class='bx bxs-up-arrow-circle fs-3 arrowup_colored '>
+                                        <span class="fs-4">47</span>
+                                    </i>
+                                    <i class='bx bxs-down-arrow-circle fs-3 arrowdown_colored ms-4'> <span
+                                            class="fs-4">2</span></i>
+                                </div>
+                            </div>
                             <div class="col col-md">
                                 <div class="mb-2">
                                     <label for="" class="form-label">Judul Buku</label>
@@ -59,12 +67,21 @@
                         <div class="row mt-4">
                             <div class="col col-md">
                                 <button class="btn btn-primary">Pinjam</button>
+                                <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-custom-class="custom-tooltip" data-bs-title="Add to personal collections">
+                                    <i class='bx bxs-star'></i>
+                                </button>
                             </div>
+
                         </div>
                     </div>
                 </div>
-                <div class="card mt-4">
-                    <img class="card" />
+                <button type="button" class="btn btn-primary mt-3 ms-1 mb-2" data-bs-toggle="modal"
+                    data-bs-target="#modalId" aria-pressed="false" autocomplete="off">
+                    Ulas Buku
+                </button>
+
+                <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Ulasan</h4>
                         <hr>
@@ -87,6 +104,60 @@
         </div>
     </form>
     <!-- / Content -->
+
+    <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">
+                        Tulis Ulasanmu
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        @csrf
+                        <div class="mb-3">
+
+                            <textarea class="form-control" name="" id="summernote" rows="10" placeholder="Tulis"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input rating-input-pos" style="outline:none" type="radio"
+                                    name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1"><i
+                                        class='bx bxs-up-arrow-circle fs-3 arrowup'></i> This Book is Good</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input rating-input-neg" type="radio" name="inlineRadioOptions"
+                                    id="inlineRadio2" value="option2">
+                                <label class="form-check-label" for="inlineRadio2"><i
+                                        class='bx bxs-down-arrow-circle fs-3 arrowdown'></i>This Book is Not Good</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional: Place to the bottom of scripts -->
+    <script>
+        const myModal = new bootstrap.Modal(
+            document.getElementById("modalId"),
+            options,
+        );
+    </script>
+
+
 
     <!-- Footer -->
     <footer class="content-footer footer bg-footer-theme">

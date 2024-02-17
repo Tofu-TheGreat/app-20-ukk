@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6 herobold">
-                <h2 class="text-white font20">About <span class="orangefont">InLivre</span></h2>
+                <h2 class="text-white font20" id="slide">About <span class="orangefont">InLivre</span></h2>
                 <p class="fontregular text-white mt-3">InLivre adalah sebuah aplikasi peminjaman buku
                     yang terintegrasi dengan perpustakaan, InLivre memuat berbagai fitur yang penting dalam melakukan
                     transaksi peminjaman buku. InLivre dibuat berdasarkan kebutuhan para pembaca dan peminjam buku.
@@ -15,7 +15,7 @@
                 </p>
             </div>
             <div class="col-6">
-                <img class="mb-5 mt-5 ms-5" src="{{ asset('page_image/Group 18.png') }}" alt="">
+                <img class="mb-5 mt-5 ms-5" id="static" src="{{ asset('page_image/Group 18.png') }}" alt="">
             </div>
         </div>
     </div>

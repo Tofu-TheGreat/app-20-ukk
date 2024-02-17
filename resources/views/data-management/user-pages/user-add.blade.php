@@ -5,10 +5,10 @@
         @csrf
         <div class="container-fluid flex-grow-1 container-p-y d-flex align-items-center">
             <div class="container">
-                <div class="card mb-3">
-                    <div class="card-body d-flex align-items-center mt-3">
-                        <h2 class="bold text-dark">Form Users</h2>
-                    </div>
+                <div class="card mb-3 border border-1 rounded-5 border-primary">
+                    <h2 class="text-primary fw-bold d-flex align-items-center mt-3 ms-2"><i style="font-size: 30px;"
+                            class='bx bxs-user-plus ms-1 me-1 '> </i>Form add User
+                    </h2>
                 </div>
                 <div class="card">
                     <div class="card-body">

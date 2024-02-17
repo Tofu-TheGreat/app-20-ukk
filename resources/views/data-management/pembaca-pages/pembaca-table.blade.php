@@ -5,7 +5,7 @@
         <div class="container">
             <div class="card mb-3 border border-1 rounded-5 border-primary">
                 <h2 class="text-primary fw-bold d-flex align-items-center mt-3 ms-2"><i style="font-size: 30px;"
-                        class='bx bxs-collection ms-1 me-1'></i>Categories
+                        class='bx bxs-collection ms-1 me-1'></i>Pembaca
                 </h2>
             </div>
             <div class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modal-tambah">Tambah</div>
@@ -19,7 +19,8 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nama Kategori</th>
+                                <th scope="col">Username Pembaca</th>
+                                <th scope="col">Tanggal Mulai</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -27,6 +28,7 @@
                             <tr>
                                 <th scope="row">1</th>
                                 <td>Mark</td>
+                                <td>20-02-2024</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-primary dropdown-toggle"
@@ -95,7 +97,7 @@
             </div>
         </div>
     </div>
-    @include('data-management.category-pages.category-modals')
+    @include('data-management.pembaca-pages.pembaca-modals')
     <footer class="content-footer footer bg-footer-theme">
         <div class="container-fluid d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
             <div class="mb-2 mb-md-0">

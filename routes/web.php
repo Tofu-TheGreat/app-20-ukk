@@ -38,13 +38,19 @@ Route::get('/user-add-page', function () {
 Route::get('/user-edit-page', function () {
     return view('data-management.user-pages.user-edit');
 });
+Route::get('/pembaca-table-page', function () {
+    return view('data-management.pembaca-pages.pembaca-table');
+});
 
 Route::get('/book-page', function () {
     return view('data-management.book-pages.book');
 });
 Route::get('/book-detail-page', function () {
     return view('data-management.book-pages.book-detail');
-});;
+});
+Route::get('/personal-collections-page', function () {
+    return view('data-management.personal-collections-pages.personal-collections');
+});
 
 Route::get('/category-page', function () {
     return view('data-management.category-pages.category-table');
