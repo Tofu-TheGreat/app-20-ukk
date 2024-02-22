@@ -17,7 +17,7 @@
     class="light-style layout-menu-fixed"
     dir="ltr"
     data-theme="theme-default"
-    data-assets-path="../assets/"
+    data-assets-path="../../assets/"
     data-template="vertical-menu-template-free"
 >
     <head>
@@ -36,7 +36,7 @@
         <link
             rel="icon"
             type="image/x-icon"
-            href="../assets/img/favicon/favicon.ico"
+            href="../../assets/img/favicon/favicon.ico"
         />
 
         <!-- Fonts -->
@@ -48,7 +48,7 @@
         />
 
         <!-- Icons. Uncomment required icon fonts -->
-        <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+        <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
 
         <!-- Core CSS -->
         <link

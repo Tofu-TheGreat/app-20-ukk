@@ -32,7 +32,7 @@ Route::get('/delete-buku/{id}', [App\Http\Controllers\BukuController::class, 'de
 
 Route::get('/dashboard-admin-page', function () {
     return view('data-management.dashboard');
-});
+})->middleware('auth', 'user-access:admin');
 Route::get('/user-table-page', function () {
     return view('data-management.user-pages.user-table');
 });

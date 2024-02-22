@@ -14,10 +14,11 @@ class Role
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, ...$roles): Response
+    public function handle(Request $request, Closure $next, $roles): Response
     {
-        if(Auth::user()->role == $roles){
+        if (Auth::user()->role === $roles) {
             return $next($request);
         }
+        return redirect()->intended('/login-page');
     }
 }
