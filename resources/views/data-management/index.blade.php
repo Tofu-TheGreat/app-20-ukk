@@ -174,6 +174,10 @@
                     height: 200,
                     focus: true
                 });
+                $('#summernoteEdit').summernote({
+                    height: 200,
+                    focus: true
+                });
                 $('.js-example-basic-multiple').select2();
             });
         </script>

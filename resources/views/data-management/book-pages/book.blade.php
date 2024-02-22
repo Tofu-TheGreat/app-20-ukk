@@ -21,10 +21,10 @@
                                 alt="Card image cap">
                             <div class="row position-absolute top-0 start-0 mb-3">
                                 <i class='bx bxs-up-arrow-circle fs-3 arrowup_colored text-card mt-2 mb-2'>
-                                    <span class="fs-4">47</span>
+                                    <span class="fs-4">{{ $positive->where('id_buku', $item->id_buku)->count() }}</span>
                                 </i>
                                 <i class='bx bxs-down-arrow-circle fs-3 arrowdown_colored text-card'> <span
-                                        class="fs-4">2</span></i>
+                                        class="fs-4">{{ $negative->where('id_buku', $item->id_buku)->count() }}</span></i>
                             </div>
                             <div class="row position-absolute bottom-0 start-0 ms-2 mb-3">
                                 <div class="col-3 col-md-3 col-sm-auto  col-lg-3">
@@ -33,20 +33,22 @@
                                 <div class="col-5 col-md-4 col-sm-auto  col-lg-4">
                                     <a href="/delete-buku/{{ $item->id_buku }}" class="btn btn-danger ms-2">Hapus</a>
                                 </div>
-                                <div class="col-6 col-md-5 col-sm-auto col-lg-5">
-                                    <form action="{{ route('koleksi.store') }}" method="post">
-                                        @csrf
-                                        <input type="text" name="id_user" value="{{ Auth::user()->id }}" hidden
-                                            id="">
-                                        <input type="text" name="id_buku" value="{{ $item->id_buku }}" hidden
-                                            id="">
-                                        <button type="submit" class="btn btn-info" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" data-bs-custom-class="custom-tooltip"
-                                            data-bs-title="Add to personal collections">
-                                            <i class='bx bxs-star'></i>
-                                        </button>
-                                    </form>
-                                </div>
+                                {{-- @if ($koleksi['id_buku'] == $item->id_buku) --}}
+                                    <div class="col-6 col-md-5 col-sm-auto col-lg-5">
+                                        <form action="{{ route('koleksi.store') }}" method="post">
+                                            @csrf
+                                            <input type="text" name="id_user" value="{{ Auth::user()->id }}" hidden
+                                                id="">
+                                            <input type="text" name="id_buku" value="{{ $item->id_buku }}" hidden
+                                                id="">
+                                            <button type="submit" class="btn btn-info" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                                                data-bs-title="Add to personal collections">
+                                                <i class='bx bxs-star'></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                {{-- @endif --}}
                             </div>
                         </div>
                     </div>

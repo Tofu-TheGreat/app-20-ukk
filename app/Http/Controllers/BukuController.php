@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use App\Models\Kategori;
 use App\Models\KategoriBuku;
+use App\Models\KoleksiBuku;
+use App\Models\Ulasan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -20,7 +22,10 @@ class BukuController extends Controller
         $buku = Buku::get();
         $kategori = Kategori::get();
         $kategoribuku = KategoriBuku::get();
-        return view('data-management.book-pages.book', compact('buku', 'kategori', 'kategoribuku'))->with('title', 'Buku');
+        $koleksi = KoleksiBuku::where('id_user', auth()->user()->id)->get();
+        $positive = Ulasan::where('status', 'up')->get();
+        $negative = Ulasan::where('status', 'down')->get();
+        return view('data-management.book-pages.book', compact('buku', 'kategori', 'kategoribuku', 'positive', 'negative', 'koleksi'))->with('title', 'Buku');
     }
 
     /**
@@ -74,8 +79,11 @@ class BukuController extends Controller
     {
         $buku = Buku::where('id_buku', $id)->first();
         $kategori = Kategori::get();
+        $ulasan = Ulasan::where('id_buku', $id)->orderBy('created_at')->get();
         $kategoribuku = KategoriBuku::where('id_buku', $id)->get()->toArray();
-        return view('data-management.book-pages.book-detail', compact(['buku', 'kategoribuku', 'kategori']))->with('title', 'Edit Buku');
+        $positive = Ulasan::where('id_buku', $id)->where('status', 'up')->count();
+        $negative = Ulasan::where('id_buku', $id)->where('status', 'down')->count();
+        return view('data-management.book-pages.book-detail', compact(['buku', 'kategoribuku', 'kategori', 'ulasan', 'positive', 'negative']))->with('title', 'Edit Buku');
     }
 
     /**

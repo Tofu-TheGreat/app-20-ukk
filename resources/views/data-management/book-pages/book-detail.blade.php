@@ -17,10 +17,10 @@
                                     src="{{ asset('book_cover/' . $buku->sampul_buku) }}" alt="">
                                 <div class="d-flex justify-content-center mt-3">
                                     <i class='bx bxs-up-arrow-circle fs-3 arrowup_colored '>
-                                        <span class="fs-4">47</span>
+                                        <span class="fs-4">{{ $positive }}</span>
                                     </i>
                                     <i class='bx bxs-down-arrow-circle fs-3 arrowdown_colored ms-4'> <span
-                                            class="fs-4">2</span></i>
+                                            class="fs-4">{{ $negative }}</span></i>
                                 </div>
                             </div>
                             <div class="col col-md">
@@ -88,19 +88,39 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Ulasan</h4>
-                        <hr>
-                        <div class="row mt-3">
-                            <div class="col col-md-10">
-                                <div>Username</div>
-                                <div class="mb-3">Tanggal</div>
-                                <div>Ulasannya</div>
+                        @foreach ($ulasan as $ulasans)
+                            <hr>
+                            <div class="row mt-3">
+                                <div class="col col-md-10">
+                                    <div class="fw-bold">{{ $ulasans->user->username }}</div>
+                                    <div class="mb-3 fw-bold ">
+                                        {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $ulasans->created_at)->format('d-m-Y') }}
+                                    </div>
+                                    {{ $ulasans->ulasan }}
+                                </div>
+                                <div class="col col-md-1">
+                                    @if ($ulasans->status == 'up')
+                                        <h1 class='bx bx-up-arrow-alt text-dark bg-success rounded-circle '></h1>
+                                    @else
+                                        <h1 class='bx bx-down-arrow-alt text-dark bg-danger rounded-circle '></h1>
+                                    @endif
+                                </div>
+                                <div class="col col-md-1">
+                                    <div class="dropdown">
+                                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class='bx bx-dots-vertical-rounded'></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item"
+                                                    data-bs-target="#modalEditUlasan{{ $ulasans->id_ulasan }}"
+                                                    data-bs-toggle="modal" href="#">Edit Ulasan</a></li>
+                                            <li><a class="dropdown-item" href="#">Hapus Ulasan</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col col-md-2">
-                                <h1 class='bx bx-up-arrow-alt text-dark bg-success rounded-circle '></h1>
-                                <h1 class='bx bx-down-arrow-alt text-dark bg-danger rounded-circle '></h1>
-                            </div>
-
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -119,39 +139,91 @@
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form action="" method="post">
+                <form action="{{ route('ulasan.store') }}" method="post">
+                    <div class="modal-body">
                         @csrf
+                        <input type="text" name="id_user" value="{{ Auth::user()->id }}" hidden id="">
+                        <input type="text" name="id_buku" value="{{ $buku->id_buku }}" hidden id="">
                         <div class="mb-3">
-
-                            <textarea class="form-control" name="" id="summernote" rows="10" placeholder="Tulis"></textarea>
+                            <textarea class="form-control" name="ulasan" id="summernote" rows="10" placeholder="Tulis"></textarea>
                         </div>
 
                         <div class="mb-3">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input rating-input-pos" style="outline:none" type="radio"
-                                    name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                    name="status" id="inlineRadio1" value="up">
                                 <label class="form-check-label" for="inlineRadio1"><i
                                         class='bx bxs-up-arrow-circle fs-3 arrowup'></i> This Book is Good</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input rating-input-neg" type="radio" name="inlineRadioOptions"
-                                    id="inlineRadio2" value="option2">
+                                <input class="form-check-input rating-input-neg" type="radio" name="status"
+                                    id="inlineRadio2" value="down">
                                 <label class="form-check-label" for="inlineRadio2"><i
                                         class='bx bxs-down-arrow-circle fs-3 arrowdown'></i>This Book is Not Good</label>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="button" class="btn btn-primary">Submit</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+    @foreach ($ulasan as $ulasans)
+        <div class="modal fade" id="modalEditUlasan{{ $ulasans->id_ulasan }}" tabindex="-1" data-bs-backdrop="static"
+            data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">
+                            Edit Ulasanmu
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('ulasan.update', $ulasans->id_ulasan) }}" method="post">
+                        @csrf
+                        @method('put')
+                        <div class="modal-body">
+                            <input type="text" name="id_user" value="{{ Auth::user()->id }}" hidden id="">
+                            <input type="text" name="id_buku" value="{{ $buku->id_buku }}" hidden id="">
+                            <div class="mb-3">
+                                <textarea class="form-control" name="ulasan" id="summernoteEdit" rows="10" placeholder="Tulis">{{ $ulasans->ulasan }}</textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input rating-input-pos" style="outline:none" type="radio"
+                                        name="status" id="inlineRadio1" value="up"
+                                        {{ $ulasans->status == 'up' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="inlineRadio1"><i
+                                            class='bx bxs-up-arrow-circle fs-3 arrowup'></i> This Book is Good</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input rating-input-neg" type="radio" name="status"
+                                        id="inlineRadio2" value="down"
+                                        {{ $ulasans->status == 'down' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="inlineRadio2"><i
+                                            class='bx bxs-down-arrow-circle fs-3 arrowdown'></i>This Book is Not
+                                        Good</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
     <div class="modal fade" id="modalPinjam" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
         role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
