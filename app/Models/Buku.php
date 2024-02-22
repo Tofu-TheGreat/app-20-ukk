@@ -18,4 +18,10 @@ class Buku extends Model
     public function koleksi_buku(){
         return $this->hasMany(KoleksiBuku::class, 'id_buku');
     }
+    public function detail_peminjaman(){
+        return $this->hasMany(DetailPeminjaman::class, 'id_buku');
+    }
+    public function ulasan(){
+        return $this->hasMany(Ulasan::class, 'id_buku');
+    }
 }

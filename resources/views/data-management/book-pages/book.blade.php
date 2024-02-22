@@ -17,8 +17,7 @@
                 @foreach ($buku as $item)
                     <div class="col col-md-3 me-3">
                         <div class="card h-100">
-                            <img class="card-img h-100"
-                                src="{{ asset('book_cover/'. $item->sampul_buku ) }}"
+                            <img class="card-img h-100" src="{{ asset('book_cover/' . $item->sampul_buku) }}"
                                 alt="Card image cap">
                             <div class="row position-absolute top-0 start-0 mb-3">
                                 <i class='bx bxs-up-arrow-circle fs-3 arrowup_colored text-card mt-2 mb-2'>
@@ -28,14 +27,25 @@
                                         class="fs-4">2</span></i>
                             </div>
                             <div class="row position-absolute bottom-0 start-0 ms-2 mb-3">
-                                <div class="col-5 col-md-3 col-sm-auto  col-lg-5">
+                                <div class="col-3 col-md-3 col-sm-auto  col-lg-3">
                                     <a href="{{ route('buku.show', $item->id_buku) }}" class="btn btn-primary">Detail</a>
                                 </div>
-                                <div class="col-7 col-md-8 col-sm-auto  col-lg-7">
-                                    <div class="col-5 col-md-3 col-sm-auto  col-lg-5">
-                                        <a href="/delete-buku/{{ $item->id_buku }}" class="btn btn-danger">Hapus</a>
-                                    </div>
-
+                                <div class="col-5 col-md-4 col-sm-auto  col-lg-4">
+                                    <a href="/delete-buku/{{ $item->id_buku }}" class="btn btn-danger ms-2">Hapus</a>
+                                </div>
+                                <div class="col-6 col-md-5 col-sm-auto col-lg-5">
+                                    <form action="{{ route('koleksi.store') }}" method="post">
+                                        @csrf
+                                        <input type="text" name="id_user" value="{{ Auth::user()->id }}" hidden
+                                            id="">
+                                        <input type="text" name="id_buku" value="{{ $item->id_buku }}" hidden
+                                            id="">
+                                        <button type="submit" class="btn btn-info" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                                            data-bs-title="Add to personal collections">
+                                            <i class='bx bxs-star'></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -96,5 +106,4 @@
             data-bs-toggle="modal" data-bs-target="#modalTambah"><i class="fab fa-plus"></i></button>
     </div>
     @include('data-management.book-pages.book-add')
-
 @endsection

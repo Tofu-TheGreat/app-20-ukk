@@ -75,7 +75,7 @@
             </a>
         </li>
         <li class="menu-item ">
-            <a href="/peminjaman-page" class="menu-link">
+            <a href="/peminjaman" class="menu-link">
                 <i class='menu-icon tf-icons bx menu-icon tf-icons bxs-hourglass-bottom'></i>
                 <div data-i18n="Analytics">Peminjaman</div>
             </a>
@@ -97,7 +97,7 @@
                     </a>
                 </li>
                 <li class="menu-item ">
-                    <a href="/personal-collections-page" class="menu-link">
+                    <a href="/koleksi" class="menu-link">
                         <div data-i18n="Without menu">
                             Personal Collections
                         </div>
@@ -123,10 +123,13 @@
             </a>
         </li>
         <li class="menu-item ">
-            <a href="/" class="menu-link bg-danger text-white">
-                <i class='menu-icon tf-icons bx menu-icon tf-icons bx-power-off'></i>
-                <div data-i18n="Analytics">Log Out</div>
-            </a>
+            <form action="/logout-action" method="post">
+                @csrf
+                <button type="submit"  class="menu-link bg-danger text-white">
+                    <i class='menu-icon tf-icons bx menu-icon tf-icons bx-power-off'></i>
+                    <div data-i18n="Analytics">Log Out</div>
+                </button>
+            </form>
         </li>
     </ul>
 </aside>

@@ -72,11 +72,7 @@
                             <div class="col col-md">
                                 <button type="button" data-bs-target="#modalPinjam" data-bs-toggle="modal"
                                     class="btn btn-primary">Pinjam</button>
-                                <button type="button" class="btn btn-info" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" data-bs-custom-class="custom-tooltip"
-                                    data-bs-title="Add to personal collections">
-                                    <i class='bx bxs-star'></i>
-                                </button>
+
                                 <button type="button" data-bs-toggle="modal"
                                     data-bs-target="#modalEdit{{ $buku->id_buku }}" class="btn btn-primary">Edit</button>
                             </div>
@@ -166,22 +162,29 @@
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form action="" method="post">
+                <form action="/peminjaman-steptwo" method="post">
+                    <div class="modal-body">
+
                         @csrf
+                        <input type="text" name="id_buku" id="" value="{{ $buku->id_buku }}" hidden>
                         <div class="mb-3">
                             <label for="" class="form-label">Nama Peminjam</label>
-                            <input type="text" disabled value="" class="form-control" name=""
+                            <input type="text" disabled value="{{ Auth::user()->nama_lengkap }}" class="form-control"
+                                name="" id="" aria-describedby="helpId" placeholder="" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Tgl. Peminjaman</label>
+                            <input type="date" id="tgl_peminjaman" class="form-control" name="tanggal_peminjaman"
                                 id="" aria-describedby="helpId" placeholder="" />
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="button" class="btn btn-primary">Submit</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Selanjutnya</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -194,6 +197,9 @@
         );
     </script>
     @include('data-management.book-pages.book-edit')
+    <script>
+        document.getElementById('tgl_peminjaman').valueAsDate = new Date();
+    </script>
 
 
     <!-- Footer -->

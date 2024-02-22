@@ -15,40 +15,50 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">NIK</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">JK</th>
-                                <th scope="col">Role</th>
+                                <th scope="col">Nama Peminjam</th>
+                                <th scope="col">Tgl. Peminjaman</th>
+                                <th scope="col">Tgl. Pengembalian</th>
+                                <th scope="col">Buku</th>
+                                <th scope="col">Jumlah</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary dropdown-toggle"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Primary
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><button class="dropdown-item" data-bs-toggle="modal"
-                                                    data-bs-target="#modal-ubah-status" href="javascript:void(0);">Ubah
-                                                    Status</button>
-                                            </li>
-                                            <li><a class="dropdown-item" href="javascript:void(0);">Edit</a></li>
-                                            <li><a class="dropdown-item text-danger" href="javascript:void(0);">Delete</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                            <?php
+                            $no = 1;
+                            ?>
+                            @foreach ($peminjaman_nostatus as $item1)
+                                <tr>
+                                    <th scope="row">{{ $no++ }}</th>
+                                    <td>{{ $item1->user->nama_lengkap }}</td>
+                                    <td>{{ $item1->tanggal_peminjaman }}</td>
+                                    <td>{{ $item1->tanggal_pengembalian }}</td>
+                                    <td>Buku 1, Buku 2</td>
+                                    <td>2</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><button class="dropdown-item" data-bs-toggle="modal"
+                                                        data-bs-target="#modal-ubah-no-status{{ $item1->id_peminjaman }}">Ubah
+                                                        Status</button>
+                                                </li>
+                                                <li><a class="dropdown-item"
+                                                        data-bs-target="#edit-peminjaman-nostatus{{ $item1->id_peminjaman }}"
+                                                        data-bs-toggle="modal">Edit</a>
+                                                </li>
+                                                <li><a class="dropdown-item text-danger"
+                                                        href="/delete-peminjaman/{{ $item1->id_peminjaman }}">Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
@@ -62,38 +72,53 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">NIK</th>
-                                        <th scope="col">Username</th>
-                                        <th scope="col">Email</th>
+                                        <th scope="col">Nama Peminjam</th>
+                                        <th scope="col">Tgl. Peminjaman</th>
+                                        <th scope="col">Tgl. Pengembalian</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-primary dropdown-toggle"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Primary
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><button class="dropdown-item" data-bs-toggle="modal"
-                                                            data-bs-target="#modal-ubah-status"
-                                                            href="javascript:void(0);">Ubah
-                                                            Status</button>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">Edit</a></li>
-                                                    <li><a class="dropdown-item text-danger"
-                                                            href="javascript:void(0);">Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                    $no = 1;
+                                    ?>
+                                    @foreach ($peminjaman_dipinjam as $item2)
+                                        <tr>
+                                            <th scope="row">{{ $no++ }}</th>
+                                            <td>{{ $item2->user->nama_lengkap }}</td>
+                                            <td>{{ $item2->tanggal_peminjaman }}</td>
+                                            <td>{{ $item2->tanggal_pengembalian }}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Primary
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><button class="dropdown-item" data-bs-toggle="modal"
+                                                                data-bs-target="#modal-ubah-status-dipinjam{{ $item2->id_peminjaman }}">Ubah
+                                                                Status</button>
+                                                        </li>
+                                                        <li>
+                                                            <form action="/hapus-status/{{ $item2->id_peminjaman }}"
+                                                                method="post">
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-danger d-block dropdown-item" >Hapus
+                                                                    Status</button>
+                                                            </form>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                data-bs-target="#edit-peminjaman-dipinjam{{ $item2->id_peminjaman }}"
+                                                                data-bs-toggle="modal">Edit</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item text-danger"
+                                                                href="/delete-peminjaman/{{ $item2->id_peminjaman }}">Delete</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -107,38 +132,53 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">NIK</th>
-                                        <th scope="col">Username</th>
-                                        <th scope="col">Email</th>
+                                        <th scope="col">Nama Peminjam</th>
+                                        <th scope="col">Tgl. Peminjaman</th>
+                                        <th scope="col">Tgl. Pengembalian</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-primary dropdown-toggle"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Primary
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><button class="dropdown-item" data-bs-toggle="modal"
-                                                            data-bs-target="#modal-ubah-status"
-                                                            href="javascript:void(0);">Ubah
-                                                            Status</button>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">Edit</a></li>
-                                                    <li><a class="dropdown-item text-danger"
-                                                            href="javascript:void(0);">Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                    $no = 1;
+                                    ?>
+                                    @foreach ($peminjaman_dikembalikan as $item3)
+                                        <tr>
+                                            <th scope="row">{{ $no++ }}</th>
+                                            <td>{{ $item3->user->nama_lengkap }}</td>
+                                            <td>{{ $item3->tanggal_peminjaman }}</td>
+                                            <td>{{ $item3->tanggal_pengembalian }}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Primary
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><button class="dropdown-item" data-bs-toggle="modal"
+                                                                data-bs-target="#modal-ubah-status-dikembalikan{{ $item3->id_peminjaman }}">Ubah
+                                                                Status</button>
+                                                        </li>
+                                                        <li>
+                                                            <form action="/hapus-status/{{ $item3->id_peminjaman }}"
+                                                                method="post">
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-danger d-block dropdown-item" >Hapus
+                                                                    Status</button>
+                                                            </form>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                data-bs-target="#edit-peminjaman-dikembalikan{{ $item3->id_peminjaman }}"
+                                                                data-bs-toggle="modal">Edit</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item text-danger"
+                                                                href="/delete-peminjaman/{{ $item3->id_peminjaman }}">Delete</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

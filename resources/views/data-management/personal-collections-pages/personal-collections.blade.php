@@ -9,28 +9,30 @@
         </div>
         <div class="card">
             <div class="row mt-3 mb-3 ms-2">
-                <div class="col col-md-3">
-                    <div class="card h-100">
-                        <img class="card-img h-100"
-                            src="{{ asset('page_image/canva-brown-rusty-mystery-novel-book-cover-hG1QhA7BiBU.jpg') }}"
-                            alt="Card image cap">
+                @foreach ($koleksibuku as $item)
+                    <div class="col col-md-3">
+                        <div class="card h-100">
+                            <img class="card-img h-100"
+                                src="{{ asset('book_cover/' . $item->buku->sampul_buku) }}"
+                                alt="Card image cap">
 
-                        <div class="row position-absolute bottom-0 start-0 ms-2 mb-3">
-                            <div class="col">
-                                <a href="/book-detail-page" class="btn btn-primary">Detail</a>
-                            </div>
-                            <div class="col">
+                            <div class="row position-absolute bottom-0 start-0 ms-2 mb-3">
                                 <div class="col">
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" data-bs-custom-class="custom-tooltip"
-                                        data-bs-title="Remove from personal collections">
-                                        <i class='bx bxs-trash-alt'></i>
-                                    </button>
+                                    <a href="{{ route('buku.show', $item->buku->id_buku) }}" class="btn btn-primary">Detail</a>
+                                </div>
+                                <div class="col">
+                                    <div class="col">
+                                        <a href="/hapus-koleksi/{{ $item->id_koleksi_buku }}" type="button" class="btn btn-danger" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                                            data-bs-title="Remove from personal collections">
+                                            <i class='bx bxs-trash-alt'></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
 
@@ -82,5 +84,4 @@
             </div>
         </div>
     </div>
-
 @endsection

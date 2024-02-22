@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KoleksiBuku;
+use App\Models\DetailPeminjaman;
 use Illuminate\Http\Request;
 
-class KoleksiBukuController extends Controller
+class DetailPeminjamanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $koleksibuku = KoleksiBuku::where('id_user', auth()->user()->id)->get();
-        return view('data-management.personal-collections-pages.personal-collections', compact('koleksibuku'))->with('title', 'Koleksi Buku Table');
+        //
     }
 
     /**
@@ -29,14 +28,13 @@ class KoleksiBukuController extends Controller
      */
     public function store(Request $request)
     {
-        $pc = KoleksiBuku::create($request->all());
-        return redirect()->intended('/koleksi');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(KoleksiBuku $koleksiBuku)
+    public function show(DetailPeminjaman $detailPeminjaman)
     {
         //
     }
@@ -44,7 +42,7 @@ class KoleksiBukuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(KoleksiBuku $koleksiBuku)
+    public function edit(DetailPeminjaman $detailPeminjaman)
     {
         //
     }
@@ -52,7 +50,7 @@ class KoleksiBukuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, KoleksiBuku $koleksiBuku)
+    public function update(Request $request, DetailPeminjaman $detailPeminjaman)
     {
         //
     }
@@ -60,10 +58,8 @@ class KoleksiBukuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(DetailPeminjaman $detailPeminjaman)
     {
-        $pc = KoleksiBuku::where('id_koleksi_buku', $id)->first();
-        $pc->delete();
-        return back();
+        //
     }
 }
