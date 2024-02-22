@@ -17,10 +17,17 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
     protected $fillable = [
-        'name',
+        'nik',
+        'username',
         'email',
+        'nama_lengkap',
+        'jenis_kelamin',
+        'nomor_telepon',
         'password',
+        'alamat',
+        'role',
     ];
 
     /**
@@ -42,4 +49,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function koleksi_buku(){
+        return $this->hasMany(KoleksiBuku::class, 'id_user');
+    }
 }

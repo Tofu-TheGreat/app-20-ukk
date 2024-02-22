@@ -82,6 +82,5 @@
             </div>
         </div>
     </div>
-    @include('data-management.book-pages.book-add')
-    @include('data-management.book-pages.book-edit')
+
 @endsection

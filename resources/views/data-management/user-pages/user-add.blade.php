@@ -1,7 +1,7 @@
 @extends('data-management.index')
 
 @section('contents')
-    <form action="" method="post">
+    <form action="{{ route('user.store') }}" method="post">
         @csrf
         <div class="container-fluid flex-grow-1 container-p-y d-flex align-items-center">
             <div class="container">
@@ -17,7 +17,7 @@
                                 <div class="mb-3">
                                     <label for="defaultFormControlInput" class="form-label">NIK</label>
                                     <input type="text" name="nik" class="form-control" id="defaultFormControlInput"
-                                        placeholder="John Doe" aria-describedby="defaultFormControlHelp">
+                                        placeholder="Ex : 8472000...." aria-describedby="defaultFormControlHelp">
                                     <div id="defaultFormControlHelp" class="form-text">
                                         Nik harus berjumlah 16 digit
                                     </div>
@@ -25,7 +25,7 @@
                                 <div class="mb-3">
                                     <label for="defaultFormControlInput" class="form-label">Username</label>
                                     <input type="text" name="username" class="form-control" id="defaultFormControlInput"
-                                        placeholder="John Doe" aria-describedby="defaultFormControlHelp">
+                                        placeholder="Ex :John2" aria-describedby="defaultFormControlHelp">
                                     <div id="defaultFormControlHelp" class="form-text">
                                         Pilih Username yang Unik
                                     </div>
@@ -33,7 +33,7 @@
                                 <div class="mb-3">
                                     <label for="defaultFormControlInput" class="form-label">Email</label>
                                     <input type="email" name="email" class="form-control" id="defaultFormControlInput"
-                                        placeholder="John Doe" aria-describedby="defaultFormControlHelp">
+                                        placeholder="Ex : Email@gmail.com" aria-describedby="defaultFormControlHelp">
                                     <div id="defaultFormControlHelp" class="form-text">
                                         Harap Masukkan Email
                                     </div>
@@ -57,7 +57,7 @@
                                 <div class="mb-3">
                                     <label for="defaultFormControlInput" class="form-label">Nama Lengkap</label>
                                     <input type="text" name="nama_lengkap" class="form-control"
-                                        id="defaultFormControlInput" placeholder="John Doe"
+                                        id="defaultFormControlInput" placeholder="Ex : John Doe"
                                         aria-describedby="defaultFormControlHelp">
                                     <div id="defaultFormControlHelp" class="form-text">
                                         Tulis nama lengkap
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="defaultSelect" class="form-label">Jenis kelamin</label>
-                                    <select id="defaultSelect" class="form-select">
+                                    <select id="defaultSelect" name="jenis_kelamin" class="form-select">
                                         <option>Jenis Kelamin</option>
                                         <option value="L">Laki-Laki</option>
                                         <option value="P">Perempuan</option>
@@ -77,7 +77,7 @@
                                 <div class="mb-3">
                                     <label for="defaultFormControlInput" class="form-label">Nomor Telepon</label>
                                     <input type="text" name="nomor_telepon" class="form-control"
-                                        id="defaultFormControlInput" placeholder="John Doe"
+                                        id="defaultFormControlInput" placeholder="Ex : 0877..."
                                         aria-describedby="defaultFormControlHelp">
                                     <div id="defaultFormControlHelp" class="form-text">
                                         Harap Tulis Nomor Telepon dengan Benar
@@ -85,12 +85,12 @@
                                 </div>
                                 <div>
                                     <label for="exampleFormControlTextarea1" class="form-label">Alamat</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" name="alamat" rows="5"></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" name="alamat" rows="5" placeholder ="Ex : Jalan....."></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col col-md-2">
-                                    <select id="defaultSelect" class="form-select">
+                                    <select id="defaultSelect" name="role" class="form-select">
                                         <option>Role</option>
                                         <option value="admin">Admin</option>
                                         <option value="staff">Staff</option>

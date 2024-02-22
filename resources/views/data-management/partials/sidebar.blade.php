@@ -63,7 +63,7 @@
             </a>
         </li>
         <li class="menu-item ">
-            <a href="/user-table-page" class="menu-link">
+            <a href="/user" class="menu-link">
                 <i class='menu-icon tf-icons bx menu-icon tf-icons bxs-user'></i>
                 <div data-i18n="Analytics">User Management</div>
             </a>
@@ -90,7 +90,7 @@
 
             <ul class="menu-sub">
                 <li class="menu-item ">
-                    <a href="/book-page" class="menu-link">
+                    <a href="/buku" class="menu-link">
                         <div data-i18n="Without menu">
                             All Book
                         </div>
@@ -104,7 +104,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="/category-page" class="menu-link">
+                    <a href="/kategori" class="menu-link">
                         <div data-i18n="Without navbar">
                             Categories
                         </div>

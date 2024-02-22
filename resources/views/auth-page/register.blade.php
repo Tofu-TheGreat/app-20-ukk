@@ -1,7 +1,7 @@
 @extends('auth-page.index')
 
 @section('authcontents')
-    <form action="" method="post">
+    <form action="/register-action" method="post">
         @csrf
         <div class="container-fluid">
             <div class="container">
@@ -43,11 +43,11 @@
                                 </div>
                                 <div class="input-group-reg input-group-lg mt-4">
                                     <input type="text" class="form-control-sm inputreg border width-set"
-                                        placeholder="Username" aria-label="Sizing example input" name="nama_lengkap"
+                                        placeholder="Nama Lengkap" aria-label="Sizing example input" name="nama_lengkap"
                                         aria-describedby="inputGroup-sizing-lg">
                                 </div>
                                 <div class="input-group-reg input-group-lg mt-4">
-                                    <select class="form-select-sm inputreg" aria-label="Default select example">
+                                    <select class="form-select-sm inputreg" name="jenis_kelamin" aria-label="Default select example">
                                         <option selected>Jenis Kelamin</option>
                                         <option value="L">Laki-Laki</option>
                                         <option value="P">Perempuan</option>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="col inputgroup-reg">
                                 <div class="mb-3">
-                                    <textarea class="form-control inputreg" id="exampleFormControlTextarea1" rows="3" placeholder="Alamat"></textarea>
+                                    <textarea class="form-control inputreg" name="alamat" id="exampleFormControlTextarea1" rows="3" placeholder="Alamat"></textarea>
                                 </div>
                             </div>
                             <p class="text-light mt-3"> Already Have Account? Try <a style="text-decoration: none"

@@ -53,34 +53,34 @@
         <!-- Core CSS -->
         <link
             rel="stylesheet"
-            href="../assets/vendor/css/core.css"
+            href="../../assets/vendor/css/core.css"
             class="template-customizer-core-css"
         />
         <link
             rel="stylesheet"
-            href="../assets/vendor/css/theme-default.css"
+            href="../../assets/vendor/css/theme-default.css"
             class="template-customizer-theme-css"
         />
-        <link rel="stylesheet" href="../assets/css/demo.css" />
+        <link rel="stylesheet" href="../../assets/css/demo.css" />
 
         <!-- Vendors CSS -->
         <link
             rel="stylesheet"
-            href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
+            href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
         />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
+
         {{-- Datatables --}}
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
+
         <!-- Helpers -->
-        <script src="../assets/vendor/js/helpers.js"></script>
+        <script src="../../assets/vendor/js/helpers.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-        
+
         <link href="https://cdn.jsdelivr.net/npm/@iconscout/unicons@4.0.8/css/line.min.css" rel="stylesheet">
         <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
         <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-        <script src="../assets/js/config.js"></script>
+        <script src="../../assets/js/config.js"></script>
         <style>
             .arrowup_colored{
                 color:rgb(47, 255, 92);
@@ -137,19 +137,19 @@
 
         <!-- Core JS -->
         <!-- build:js assets/vendor/js/core.js -->
-        <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-        <script src="../assets/vendor/libs/popper/popper.js"></script>
-        <script src="../assets/vendor/js/bootstrap.js"></script>
-        <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+        <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+        <script src="../../assets/vendor/libs/popper/popper.js"></script>
+        <script src="../../assets/vendor/js/bootstrap.js"></script>
+        <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-        <script src="../assets/vendor/js/menu.js"></script>
+        <script src="../../assets/vendor/js/menu.js"></script>
         <!-- endbuild -->
-        
+
         <!-- Vendors JS -->
-        
+
         <!-- Main JS -->
-        <script src="../assets/js/main.js"></script>
-        
+        <script src="../../assets/js/main.js"></script>
+
         <!-- Datatables -->
         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 
@@ -183,5 +183,5 @@
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     </body>
-    
+
 </html>

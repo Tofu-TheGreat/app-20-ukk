@@ -8,7 +8,7 @@
                         class='bx bxs-user-circle ms-1 me-1'> </i>User Table
                 </h2>
             </div>
-            <a href="/user-add-page" class="btn btn-primary mb-3">Tambah</a>
+            <a href="{{ route('user.create') }}" class="btn btn-primary mb-3">Tambah</a>
             <a class="btn btn-warning mb-3" data-bs-toggle="collapse" href="#collapseExample" role="button"
                 aria-expanded="false" aria-controls="collapseExample">
                 Tata cara pengisian
@@ -31,33 +31,36 @@
                             <?php
                             $no = 1;
                             ?>
+                            @foreach ($user as $item)
+                                <tr>
+                                    <td>{{ $no }}</td>
+                                    <td>{{ $item->nik }} </td>
+                                    <td> {{ $item->username }}</td>
+                                    <td>{{ $item->email }} </td>
+                                    <td>{{ $item->jenis_kelamin }}</td>
+                                    <td>{{ $item->role }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Primary
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><button class="dropdown-item" data-bs-toggle="modal"
+                                                        data-bs-target="#modal-detail-"
+                                                        href="javascript:void(0);">Detail</button>
+                                                </li>
+                                                <li><a class="dropdown-item" href="{{ route('user.edit', $item->id) }}">Edit</a>
+                                                </li>
+                                                <li><a class="dropdown-item text-danger"
+                                                        href="/delete-user-action/">Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
 
-                            <tr>
-                                <th scope="row">
-                                <td></td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td></td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary dropdown-toggle"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Primary
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><button class="dropdown-item" data-bs-toggle="modal"
-                                                    data-bs-target="#modal-detail-"
-                                                    href="javascript:void(0);">Detail</button>
-                                            </li>
-                                            <li><a class="dropdown-item" href="/user-edit-page">Edit</a>
-                                            </li>
-                                            <li><a class="dropdown-item text-danger" href="/delete-user-action/">Delete</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
                             @include('data-management.user-pages.user-detail')
 
                         </tbody>

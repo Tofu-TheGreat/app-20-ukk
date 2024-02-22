@@ -14,38 +14,34 @@
         </a>
         <div class="card">
             <div class="row mt-3 mb-3 ms-2">
-                <div class="col col-md-3 me-3">
-                    <div class="card h-100">
-                        <img class="card-img h-100"
-                            src="{{ asset('page_image/canva-brown-rusty-mystery-novel-book-cover-hG1QhA7BiBU.jpg') }}"
-                            alt="Card image cap">
-                        <div class="row position-absolute top-0 start-0 mb-3">
-                            <i class='bx bxs-up-arrow-circle fs-3 arrowup_colored text-card mt-2 mb-2'>
-                                <span class="fs-4">47</span>
-                            </i>
-                            <i class='bx bxs-down-arrow-circle fs-3 arrowdown_colored text-card'> <span
-                                    class="fs-4">2</span></i>
-                        </div>
-                        <div class="row position-absolute bottom-0 start-0 ms-2 mb-3">
-                            <div class="col-5 col-md-3 col-sm-auto  col-lg-5">
-                                <a href="/book-detail-page" class="btn btn-primary">Detail</a>
+                @foreach ($buku as $item)
+                    <div class="col col-md-3 me-3">
+                        <div class="card h-100">
+                            <img class="card-img h-100"
+                                src="{{ asset('book_cover/'. $item->sampul_buku ) }}"
+                                alt="Card image cap">
+                            <div class="row position-absolute top-0 start-0 mb-3">
+                                <i class='bx bxs-up-arrow-circle fs-3 arrowup_colored text-card mt-2 mb-2'>
+                                    <span class="fs-4">47</span>
+                                </i>
+                                <i class='bx bxs-down-arrow-circle fs-3 arrowdown_colored text-card'> <span
+                                        class="fs-4">2</span></i>
                             </div>
-                            <div class="col-7 col-md-8 col-sm-auto  col-lg-7">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        More
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="triggerId">
-                                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#modalEdit">Edit</a>
-                                        <a class="dropdown-item" href="#">Hapus</a>
+                            <div class="row position-absolute bottom-0 start-0 ms-2 mb-3">
+                                <div class="col-5 col-md-3 col-sm-auto  col-lg-5">
+                                    <a href="{{ route('buku.show', $item->id_buku) }}" class="btn btn-primary">Detail</a>
+                                </div>
+                                <div class="col-7 col-md-8 col-sm-auto  col-lg-7">
+                                    <div class="col-5 col-md-3 col-sm-auto  col-lg-5">
+                                        <a href="/delete-buku/{{ $item->id_buku }}" class="btn btn-danger">Hapus</a>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
 
@@ -100,5 +96,5 @@
             data-bs-toggle="modal" data-bs-target="#modalTambah"><i class="fab fa-plus"></i></button>
     </div>
     @include('data-management.book-pages.book-add')
-    @include('data-management.book-pages.book-edit')
+
 @endsection

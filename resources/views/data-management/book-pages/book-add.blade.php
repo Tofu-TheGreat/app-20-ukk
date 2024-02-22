@@ -1,4 +1,4 @@
-<form action="/book-add-action" method="post" enctype="multipart/form-data">
+<form action="{{ route('buku.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="modal fade" id="modalTambah" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
         aria-labelledby="modalTitleId" aria-hidden="true">
@@ -19,7 +19,9 @@
                     <div class="mb-3">
                         <label for="defaultSelect" class="form-label">Kategori Buku</label>
                         <select id="defaultSelect" name="id_kategori[]" multiple="multiple" class="form-select">
-                            <option value="L">Laki-Laki</option>
+                            @foreach ($kategori as $item)
+                                <option value="{{ $item->id_kategori }}">{{ $item->nama_kategori }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">

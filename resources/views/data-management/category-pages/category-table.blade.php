@@ -24,24 +24,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary dropdown-toggle"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Primary
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-edit"
-                                                    href="javascript:void(0);">Edit</a></li>
-                                            <li><a class="dropdown-item text-danger" href="javascript:void(0);">Delete</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                            <?php
+                            $no = 1;
+                            ?>
+                            @foreach ($kategori as $item)
+                                <tr>
+                                    <th scope="row">{{ $no++ }}</th>
+                                    <td>{{ $item->nama_kategori }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Primary
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" data-bs-toggle="modal"
+                                                        data-bs-target="#modal-edit{{ $item->id_kategori }}" href="javascript:void(0);">Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item text-danger"
+                                                        href="/delete-kategori/{{ $item->id_kategori }}">Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

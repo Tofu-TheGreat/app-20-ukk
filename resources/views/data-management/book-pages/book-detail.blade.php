@@ -14,8 +14,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col col-md-4"><img class ="img-fluid mt-3"
-                                    src="{{ asset('page_image/canva-brown-rusty-mystery-novel-book-cover-hG1QhA7BiBU.jpg') }}"
-                                    alt="">
+                                    src="{{ asset('book_cover/' . $buku->sampul_buku) }}" alt="">
                                 <div class="d-flex justify-content-center mt-3">
                                     <i class='bx bxs-up-arrow-circle fs-3 arrowup_colored '>
                                         <span class="fs-4">47</span>
@@ -27,8 +26,9 @@
                             <div class="col col-md">
                                 <div class="mb-2">
                                     <label for="" class="form-label">Judul Buku</label>
-                                    <input readonly type="text" name="judul_buku" class="form-control" name=""
-                                        id="" aria-describedby="helpId" placeholder="..." />
+                                    <input readonly type="text" value="{{ $buku->judul_buku }}" name="judul_buku"
+                                        class="form-control" name="" id="" aria-describedby="helpId"
+                                        placeholder="..." />
                                 </div>
                                 <div class="mb-3">
                                     <label for="defaultSelect" class="form-label">Kategori Buku</label>
@@ -39,38 +39,46 @@
                                 </div>
                                 <div class="mb-2">
                                     <label for="" class="form-label">Penulis Buku</label>
-                                    <input readonly type="text" name="penulis_buku" class="form-control" name=""
-                                        id="" aria-describedby="helpId" placeholder="..." />
+                                    <input readonly type="text" value="{{ $buku->penulis_buku }}" name="penulis_buku"
+                                        class="form-control" name="" id="" aria-describedby="helpId"
+                                        placeholder="..." />
                                 </div>
                                 <div class="mb-2">
                                     <label for="" class="form-label">Penerbit Buku</label>
-                                    <input readonly type="text" name="penerbit_buku" class="form-control" name=""
-                                        id="" aria-describedby="helpId" placeholder="..." />
+                                    <input readonly type="text" value="{{ $buku->penerbit }}" name="penerbit_buku"
+                                        class="form-control" name="" id="" aria-describedby="helpId"
+                                        placeholder="..." />
                                 </div>
                                 <div class="mb-2">
                                     <label for="" class="form-label">Tahun Terbit</label>
-                                    <input readonly type="date" name="tahun_terbit" class="form-control" name=""
-                                        id="" aria-describedby="helpId" placeholder="..." />
+                                    <input readonly type="text" value="{{ $buku->tahun_terbit }}" name="tahun_terbit"
+                                        class="form-control" name="" id="" aria-describedby="helpId"
+                                        placeholder="..." />
                                 </div>
                                 <div class="mb-2">
                                     <label for="" class="form-label">Sinopsis Buku</label>
-                                    <textarea readonly class="form-control" name="sinopsis_buku" id="" rows="3"></textarea>
+                                    <textarea readonly class="form-control" name="sinopsis_buku" id="" rows="3">{{ $buku->sinopsis_buku }}</textarea>
                                 </div>
                                 <div class="mb-2">
                                     <label for="" class="form-label">Stok Buku</label>
-                                    <input readonly type="number" name="stok_buku" class="form-control" name=""
-                                        id="" aria-describedby="helpId" placeholder="..." />
+                                    <input readonly type="number" name="stok_buku" value="{{ $buku->stok_buku }}"
+                                        class="form-control" name="" id="" aria-describedby="helpId"
+                                        placeholder="..." />
                                 </div>
 
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col col-md">
-                                <button class="btn btn-primary">Pinjam</button>
-                                <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    data-bs-custom-class="custom-tooltip" data-bs-title="Add to personal collections">
+                                <button type="button" data-bs-target="#modalPinjam" data-bs-toggle="modal"
+                                    class="btn btn-primary">Pinjam</button>
+                                <button type="button" class="btn btn-info" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                                    data-bs-title="Add to personal collections">
                                     <i class='bx bxs-star'></i>
                                 </button>
+                                <button type="button" data-bs-toggle="modal"
+                                    data-bs-target="#modalEdit{{ $buku->id_buku }}" class="btn btn-primary">Edit</button>
                             </div>
 
                         </div>
@@ -148,6 +156,35 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalPinjam" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">
+                        Formulir Peminjaman
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="" class="form-label">Nama Peminjam</label>
+                            <input type="text" disabled value="" class="form-control" name=""
+                                id="" aria-describedby="helpId" placeholder="" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Optional: Place to the bottom of scripts -->
     <script>
@@ -156,7 +193,7 @@
             options,
         );
     </script>
-
+    @include('data-management.book-pages.book-edit')
 
 
     <!-- Footer -->
