@@ -1,4 +1,4 @@
-<form action="{{ route('buku.update', $buku->id_buku) }}" method="post" enctype="multipart/form-data">
+<form action="/buku-update/{{ $buku->id_buku }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('put')
     <div class="modal fade" id="modalEdit{{ $buku->id_buku }}" tabindex="-1" data-bs-backdrop="static"

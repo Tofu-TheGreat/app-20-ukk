@@ -12,7 +12,7 @@ class KoleksiBukuController extends Controller
      */
     public function index()
     {
-        $koleksibuku = KoleksiBuku::where('id_user', auth()->user()->id)->get();
+        $koleksibuku = KoleksiBuku::where('id_user', auth()->user()->id)->get()->sortBy('created_at', SORT_REGULAR, true);
         return view('data-management.personal-collections-pages.personal-collections', compact('koleksibuku'))->with('title', 'Koleksi Buku Table');
     }
 

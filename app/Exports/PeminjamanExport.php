@@ -7,18 +7,18 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class PeminjamanNoStatusExport implements FromCollection, WithMapping, WithHeadings
+class PeminjamanExport implements FromCollection, WithHeadings, WithMapping
 {
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        return Peminjaman::where('status_peminjaman', null)->get();
+        return Peminjaman::get();
     }
     public function map($row): array
     {
-        return[
+        return [
             $row->user->nama_lengkap,
             $row->tanggal_peminjaman,
             $row->tanggal_pengembalian,
@@ -29,7 +29,7 @@ class PeminjamanNoStatusExport implements FromCollection, WithMapping, WithHeadi
 
     public function headings(): array
     {
-        return[
+        return [
             'Nama',
             'Tgl. Peminjaman',
             'Tgl. Pengembalian',

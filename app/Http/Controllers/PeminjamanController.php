@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\PeminjamanDikembalikanExport;
 use App\Exports\PeminjamanDipinjamExport;
+use App\Exports\PeminjamanExport;
 use App\Exports\PeminjamanNoStatusExport;
 use App\Models\Buku;
 use App\Models\DetailPeminjaman;
@@ -23,10 +24,11 @@ class PeminjamanController extends Controller
         $peminjaman_nostatus = Peminjaman::where('status_peminjaman', null)->get();
         $peminjaman_dipinjam = Peminjaman::where('status_peminjaman', 'dipinjam')->get();
         $peminjaman_dikembalikan = Peminjaman::where('status_peminjaman', 'dikembalikan')->get();
-        $peminjaman_auth = Peminjaman::where('id_user', Auth::user()->id)->first();
-        $peminjaman_user = DetailPeminjaman::where('id_peminjaman', $peminjaman_auth->id_peminjaman)->get();
+        $peminjaman = Peminjaman::get()
+            ->sortBy('created_at', SORT_REGULAR, true);
+        $peminjaman_user = Peminjaman::where('id_user', Auth::user()->id)->get()->sortBy('created_at', SORT_REGULAR, true);
         $user = User::get();
-        return view('data-management.peminjaman-pages.peminjaman-tables', compact(['peminjaman_nostatus', 'peminjaman_dipinjam', 'peminjaman_dikembalikan', 'user', 'peminjaman_user']))->with('title', 'Peminjaman Tables');
+        return view('data-management.peminjaman-pages.peminjaman-tables', compact(['peminjaman_nostatus', 'peminjaman_dipinjam', 'peminjaman_dikembalikan', 'user', 'peminjaman_user', 'peminjaman']))->with('title', 'Peminjaman Tables');
     }
 
     public function peminjaman_steptwo(Request $request)
@@ -134,13 +136,20 @@ class PeminjamanController extends Controller
         return back();
     }
 
-    public function export_peminjamannostatus(){
+    public function export_peminjamannostatus()
+    {
         return Excel::download(new PeminjamanNoStatusExport, 'peminjaman_nostatus.xlsx');
     }
-    public function export_peminjamandipinjam(){
+    public function export_peminjamandipinjam()
+    {
         return Excel::download(new PeminjamanDipinjamExport, 'export_peminjamandipinjam.xlsx');
     }
-    public function export_peminjamandikembalikan(){
+    public function export_peminjamandikembalikan()
+    {
         return Excel::download(new PeminjamanDikembalikanExport, 'export_peminjamandikembalikan.xlsx');
+    }
+    public function export_peminjaman()
+    {
+        return Excel::download(new PeminjamanExport, 'export_peminjaman.xlsx');
     }
 }

@@ -1,23 +1,29 @@
 @extends('data-management.index')
 
 @section('contents')
-    <form action="{{ route('user.store') }}" method="post">
+    <form action="profile-update/{{ Auth::user()->id }}" method="post">
         @csrf
+        @method('put')
+        <input type="text" name="id" value="{{ Auth::user()->id }}" hidden id="">
         <div class="container-fluid flex-grow-1 container-p-y d-flex align-items-center">
             <div class="container">
-                <div class="card mb-3 border border-1 rounded-5 border-primary">
-                    <h2 class="text-primary fw-bold d-flex align-items-center mt-3 ms-2"><i style="font-size: 30px;"
-                            class='bx bxs-user-plus ms-1 me-1 '> </i>Form add User
-                    </h2>
+                <div class="card mb-3">
+                    <div class="card-body d-flex align-items-center mt-3">
+                        <h2 class="bold text-dark">Form Users Edit</h2>
+                    </div>
                 </div>
                 <div class="card">
+                    @if ($errors->any())
+                        <span class="text-danger">{{ $errors }}</span>
+                    @endif
                     <div class="card-body">
                         <div class="row">
                             <div class="col col-md-6">
                                 <div class="mb-3">
                                     <label for="defaultFormControlInput" class="form-label">NIK</label>
                                     <input type="text" name="nik" class="form-control" id="defaultFormControlInput"
-                                        placeholder="Ex : 8472000...." required aria-describedby="defaultFormControlHelp">
+                                        placeholder="Ex : 8472000...." value="{{ Auth::user()->nik }}"
+                                        aria-describedby="defaultFormControlHelp">
                                     <div id="defaultFormControlHelp" class="form-text">
                                         Nik harus berjumlah 16 digit
                                     </div>
@@ -27,8 +33,9 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="defaultFormControlInput" class="form-label">Username</label>
-                                    <input type="text" name="username" required class="form-control" id="defaultFormControlInput"
-                                        placeholder="Ex :John2" aria-describedby="defaultFormControlHelp">
+                                    <input type="text" name="username" value="{{ Auth::user()->username }}"
+                                        class="form-control" id="defaultFormControlInput" placeholder="Ex :John2"
+                                        aria-describedby="defaultFormControlHelp">
                                     <div id="defaultFormControlHelp" class="form-text">
                                         Pilih Username yang Unik
                                     </div>
@@ -38,8 +45,9 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="defaultFormControlInput" class="form-label">Email</label>
-                                    <input type="email" required name="email" class="form-control" id="defaultFormControlInput"
-                                        placeholder="Ex : Email@gmail.com" aria-describedby="defaultFormControlHelp">
+                                    <input type="email" name="email" value="{{ Auth::user()->email }}"
+                                        class="form-control" id="defaultFormControlInput" placeholder="Ex : Email@gmail.com"
+                                        aria-describedby="defaultFormControlHelp">
                                     <div id="defaultFormControlHelp" class="form-text">
                                         Harap Masukkan Email
                                     </div>
@@ -49,7 +57,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="defaultFormControlInput" class="form-label">Password</label>
-                                    <input type="password" required name="password" class="form-control" id="defaultFormControlInput"
+                                    <input type="password" name="password" class="form-control" id="defaultFormControlInput"
                                         placeholder="******" aria-describedby="defaultFormControlHelp">
                                     @if ($errors->has('password'))
                                         <span class="text-danger">{{ $errors->first('password') }}</span>
@@ -57,7 +65,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="defaultFormControlInput" class="form-label">Konfirmasi Password</label>
-                                    <input type="password" required name="confirm_password" class="form-control"
+                                    <input type="password" name="confirm_password" class="form-control"
                                         id="defaultFormControlInput" placeholder="******"
                                         aria-describedby="defaultFormControlHelp">
                                     <div id="defaultFormControlHelp" class="form-text">
@@ -67,12 +75,13 @@
                                         <span class="text-danger">{{ $errors->first('confirm_password') }}</span>
                                     @endif
                                 </div>
+
                             </div>
                             <div class="col col-md-6">
                                 <div class="mb-3">
                                     <label for="defaultFormControlInput" class="form-label">Nama Lengkap</label>
-                                    <input type="text" required name="nama_lengkap" class="form-control"
-                                        id="defaultFormControlInput" placeholder="Ex : John Doe"
+                                    <input type="text" name="nama_lengkap" value="{{ Auth::user()->nama_lengkap }}"
+                                        class="form-control" id="defaultFormControlInput" placeholder="Ex : John Doe"
                                         aria-describedby="defaultFormControlHelp">
                                     <div id="defaultFormControlHelp" class="form-text">
                                         Tulis nama lengkap
@@ -83,46 +92,44 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="defaultSelect" class="form-label">Jenis kelamin</label>
-                                    <select id="defaultSelect" required name="jenis_kelamin" class="form-select">
+                                    <select id="defaultSelect" name="jenis_kelamin" class="form-select">
                                         <option>Jenis Kelamin</option>
-                                        <option value="L">Laki-Laki</option>
-                                        <option value="P">Perempuan</option>
+                                        <option value="L"{{ Auth::user()->jenis_kelamin == 'L' ? 'selected' : '' }}>
+                                            Laki-Laki
+                                        </option>
+                                        <option value="P" {{ Auth::user()->jenis_kelamin == 'P' ? 'selected' : '' }}>
+                                            Perempuan
+                                        </option>
                                     </select>
                                     <div id="defaultFormControlHelp" class="form-text">
                                         Harap Pilih Jenis Kelamin
                                     </div>
-                                    @if ($errors->has('jenis_kelamin'))
-                                        <span class="text-danger">{{ $errors->first('jenis_kelamin') }}</span>
-                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <label for="defaultFormControlInput" class="form-label">Nomor Telepon</label>
-                                    <input type="text" required name="nomor_telepon" class="form-control"
-                                        id="defaultFormControlInput" placeholder="Ex : 0877..."
+                                    <input type="text" value="{{ Auth::user()->nomor_telepon }}" name="nomor_telepon"
+                                        class="form-control" id="defaultFormControlInput" placeholder="Ex : 0877..."
                                         aria-describedby="defaultFormControlHelp">
                                     <div id="defaultFormControlHelp" class="form-text">
                                         Harap Tulis Nomor Telepon dengan Benar
                                     </div>
-                                    @if ($errors->has('nomor_telepon'))
-                                        <span class="text-danger">{{ $errors->first('nomor_telepon') }}</span>
-                                    @endif
                                 </div>
                                 <div>
                                     <label for="exampleFormControlTextarea1" class="form-label">Alamat</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" required name="alamat" rows="5"
-                                        placeholder ="Ex : Jalan....."></textarea>
-                                    @if ($errors->has('alamat'))
-                                        <span class="text-danger">{{ $errors->first('alamat') }}</span>
-                                    @endif
+                                    <textarea class="form-control mb-3" id="exampleFormControlTextarea1" name="alamat" rows="5"
+                                        placeholder ="Ex : Jalan.....">{{ Auth::user()->alamat }}</textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col col-md-2">
                                     <select id="defaultSelect" name="role" class="form-select" required>
                                         <option>Role</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="staff">Staff</option>
-                                        <option value="user">User</option>
+                                        <option value="admin" {{ Auth::user()->role == 'admin' ? 'selected' : '' }}>Admin
+                                        </option>
+                                        <option value="staff" {{ Auth::user()->role == 'staff' ? 'selected' : '' }}>Staff
+                                        </option>
+                                        <option value="user" {{ Auth::user()->role == 'user' ? 'selected' : '' }}>User
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col col-md-10">
@@ -136,6 +143,7 @@
             </div>
         </div>
     </form>
+
     <!-- / Content -->
 
     <!-- Footer -->

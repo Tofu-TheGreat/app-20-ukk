@@ -100,7 +100,30 @@ class UserController extends Controller
         return back();
     }
 
-    public function export_user(){
+    public function export_user()
+    {
         return Excel::download(new UserExport, 'users.xlsx');
+    }
+
+    public function profile_update(UserRequest $request, $id)
+    {
+        $user = User::where('id', $id)->first();
+        if ($request->has('password')) {
+            $password = Hash::make($request->password);
+        } else {
+            $password = $user->password;
+        }
+        $user->update([
+            'nik' => $request->nik,
+            'username' => $request->username,
+            'email' => $request->email,
+            'nama_lengkap' => $request->nama_lengkap,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'nomor_telepon' => $request->nomor_telepon,
+            'alamat' => $request->alamat,
+            'role' => $request->role,
+            'password' => $password
+        ]);
+        return back();
     }
 }

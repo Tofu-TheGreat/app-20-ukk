@@ -72,21 +72,42 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col col-md">
-                                <button type="button" data-bs-target="#modalPinjam" data-bs-toggle="modal"
-                                    class="btn btn-primary">Pinjam</button>
-
-                                <button type="button" data-bs-toggle="modal"
-                                    data-bs-target="#modalEdit{{ $buku->id_buku }}" class="btn btn-primary">Edit</button>
+                                @if ($buku->stok_buku == 0)
+                                    <button type="button" class="btn btn-danger">Stok Habis!</button>
+                                @else
+                                    <button type="button" data-bs-target="#modalPinjam" data-bs-toggle="modal"
+                                        class="btn btn-primary">Pinjam</button>
+                                @endif
+                                @if (Auth::user()->role == 'user')
+                                @else
+                                    <button type="button" data-bs-toggle="modal"
+                                        data-bs-target="#modalEdit{{ $buku->id_buku }}"
+                                        class="btn btn-primary">Edit</button>
+                                @endif
                             </div>
 
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary mt-3 ms-1 mb-2" data-bs-toggle="modal"
-                    data-bs-target="#modalId" aria-pressed="false" autocomplete="off">
-                    Ulas Buku
-                </button>
-
+                <?php
+                $detailpeminjaman = App\Models\DetailPeminjaman::where('id_buku', $buku->id_buku)->get();
+                $pe = [];
+                ?>
+                <div class="mt-3">
+                    @if ($detailpeminjaman != null)
+                        @foreach ($detailpeminjaman as $peminja)
+                            <?php
+                            array_push($pe, $peminja->peminjaman->id_user);
+                            ?>
+                        @endforeach
+                        @if (in_array(Auth::user()->id, $pe))
+                            <button type="button" class="btn btn-primary  ms-1 mb-2" data-bs-toggle="modal"
+                                data-bs-target="#modalId" aria-pressed="false" autocomplete="off">
+                                Ulas Buku
+                            </button>
+                        @endif
+                    @endif
+                </div>
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Ulasan</h4>
@@ -98,7 +119,9 @@
                                     <div class="mb-3 fw-bold ">
                                         {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $ulasans->created_at)->format('d-m-Y') }}
                                     </div>
-                                    {{ $ulasans->ulasan }}
+
+                                    {!! $ulasans->ulasan !!}
+
                                 </div>
                                 <div class="col col-md-1">
                                     @if ($ulasans->status == 'up')
@@ -108,25 +131,29 @@
                                     @endif
                                 </div>
                                 <div class="col col-md-1">
-                                    <div class="dropdown">
-                                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                            <i class='bx bx-dots-vertical-rounded'></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item"
-                                                    data-bs-target="#modalEditUlasan{{ $ulasans->id_ulasan }}"
-                                                    data-bs-toggle="modal" href="#">Edit Ulasan</a></li>
-                                            <li><a class="dropdown-item" href="/hapus-ulasan/{{ $ulasans->id_ulasan }}">Hapus Ulasan</a></li>
-                                        </ul>
-                                    </div>
+                                    @if ($ulasans->id_user == Auth::user()->id)
+                                        <div class="dropdown">
+                                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <i class='bx bx-dots-vertical-rounded'></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item"
+                                                        data-bs-target="#modalEditUlasan{{ $ulasans->id_ulasan }}"
+                                                        data-bs-toggle="modal" href="#">Edit Ulasan</a></li>
+                                                <li><a class="dropdown-item"
+                                                        href="/hapus-ulasan/{{ $ulasans->id_ulasan }}">Hapus Ulasan</a>
+                                                </li>
+                                            </ul>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 </div>
-
             </div>
+
+        </div>
         </div>
     </form>
     <!-- / Content -->
@@ -276,32 +303,7 @@
     </script>
 
 
-    <!-- Footer -->
-    <footer class="content-footer footer bg-footer-theme">
-        <div class="container-fluid d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-            <div class="mb-2 mb-md-0">
-                ©
-                <script>
-                    document.write(
-                        new Date().getFullYear()
-                    );
-                </script>
-                2024 , made with ❤️ by
-                <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-            </div>
-            <div>
-                <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
 
-                <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank" class="footer-link me-4">Documentation</a>
-
-                <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank"
-                    class="footer-link me-4">Support</a>
-            </div>
-        </div>
-    </footer>
-    <!-- / Footer -->
 
     <div class="content-backdrop fade"></div>
 @endsection

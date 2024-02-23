@@ -56,23 +56,31 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item  ">
-            <a href="/dashboard-admin-page" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-            </a>
-        </li>
-        <li class="menu-item ">
-            <a href="/user" class="menu-link">
-                <i class='menu-icon tf-icons bx menu-icon tf-icons bxs-user'></i>
-                <div data-i18n="Analytics">User Management</div>
-            </a>
-        </li>
-        <li class="menu-item ">
-            <a href="/pembaca" class="menu-link">
-                <i class='menu-icon tf-icons bx menu-icon tf-icons bxs-user-circle'></i>
-                <div data-i18n="Analytics">Pembaca</div>
-            </a>
+        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'staff')
+            <li class="menu-item  ">
+                <a href="/dashboard-admin-page" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">Dashboard</div>
+                </a>
+            </li>
+        @endif
+        @if (Auth::user()->role == 'admin')
+            <li class="menu-item ">
+                <a href="/user" class="menu-link">
+                    <i class='menu-icon tf-icons bx menu-icon tf-icons bxs-user'></i>
+                    <div data-i18n="Analytics">User Management</div>
+                </a>
+            </li>
+        @endif
+        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'staff')
+            </li>
+            <li class="menu-item ">
+                <a href="/pembaca" class="menu-link">
+                    <i class='menu-icon tf-icons bx menu-icon tf-icons bxs-user-circle'></i>
+                    <div data-i18n="Analytics">Pembaca</div>
+                </a>
+            </li>
+        @endif
         </li>
         <li class="menu-item ">
             <a href="/peminjaman" class="menu-link">
@@ -80,6 +88,7 @@
                 <div data-i18n="Analytics">Peminjaman</div>
             </a>
         </li>
+
 
         <!-- Layouts -->
         <li class="menu-item">
@@ -103,33 +112,46 @@
                         </div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="/kategori" class="menu-link">
-                        <div data-i18n="Without navbar">
-                            Categories
-                        </div>
-                    </a>
-                </li>
-            </ul>
         </li>
+        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'staff')
+            <li class="menu-item">
+                <a href="/kategori" class="menu-link">
+                    <div data-i18n="Without navbar">
+                        Categories
+                    </div>
+                </a>
+            </li>
+        @endif
+        </li>
+    </ul>
+    </li>
 
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Pages</span>
-        </li>
-        <li class="menu-item ">
-            <a href="/" class="menu-link">
-                <i class='menu-icon tf-icons bx menu-icon tf-icons bx-arrow-from-right'></i>
-                <div data-i18n="Analytics">Back to Landing Page</div>
-            </a>
-        </li>
-        <li class="menu-item ">
-            <form action="/logout-action" method="post">
-                @csrf
-                <button type="submit"  class="menu-link bg-danger text-white">
-                    <i class='menu-icon tf-icons bx menu-icon tf-icons bx-power-off'></i>
-                    <div data-i18n="Analytics">Log Out</div>
-                </button>
-            </form>
-        </li>
+    <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Pages</span>
+    </li>
+    <li class="menu-item ">
+        <a href="/" class="menu-link">
+            <i class='menu-icon tf-icons bx menu-icon tf-icons bx-arrow-from-right'></i>
+            <div data-i18n="Analytics">Back to Landing Page</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+        <form action="/logout-action" method="post">
+            @csrf
+            <button type="submit" class="menu-link bg-danger text-white">
+                <i class='menu-icon tf-icons bx menu-icon tf-icons bx-power-off'></i>
+                <div data-i18n="Analytics">Log Out</div>
+            </button>
+        </form>
+    </li>
+    <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Other</span>
+    </li>
+    <li class="menu-item ">
+        <a href="/profile" class="menu-link">
+            <i class='menu-icon tf-icons bx menu-icon tf-icons bxs-user-pin'></i>
+            <div data-i18n="Analytics">Profile</div>
+        </a>
+    </li>
     </ul>
 </aside>
