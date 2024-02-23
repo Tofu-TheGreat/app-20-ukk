@@ -4,6 +4,7 @@
     <form action="{{ route('user.update', $user->id) }}" method="post">
         @csrf
         @method('put')
+        <input type="text" name="id" value="{{ $user->id }}" hidden id="">
         <div class="container-fluid flex-grow-1 container-p-y d-flex align-items-center">
             <div class="container">
                 <div class="card mb-3">
@@ -12,6 +13,9 @@
                     </div>
                 </div>
                 <div class="card">
+                    @if ($errors->any())
+                        <span class="text-danger">{{ $errors }}</span>
+                    @endif
                     <div class="card-body">
                         <div class="row">
                             <div class="col col-md-6">

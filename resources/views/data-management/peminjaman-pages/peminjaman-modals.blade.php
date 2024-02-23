@@ -12,8 +12,9 @@
                 <div class="row">
                     <div class="mb-3">
                         <label for="defaultFormControlInput" class="form-label">Nama Kategori</label>
-                        <input type="text" name="nama_kategori" class="form-control" id="defaultFormControlInput"
-                            placeholder="John Doe" aria-describedby="defaultFormControlHelp">
+                        <input required type="text" name="nama_kategori" class="form-control"
+                            id="defaultFormControlInput" placeholder="John Doe"
+                            aria-describedby="defaultFormControlHelp">
                     </div>
                 </div>
             </div>
@@ -44,8 +45,9 @@
                         <div class="row">
                             <div class="mb-3">
                                 <label for="" class="form-label">Ubah Status</label>
-                                <select class="form-select form-select-lg" name="status_peminjaman" id="">
-                                    <option>Select one</option>
+                                <select required class="form-select form-select-lg" name="status_peminjaman"
+                                    id="">
+
                                     <option value="dipinjam"
                                         {{ $item->status_peminjaman == 'dipinjam' ? 'selected' : '' }}>Dipinjam
                                     </option>
@@ -53,13 +55,6 @@
                                         {{ $item->status_peminjaman == 'dikembalikan' ? 'selected' : '' }}>Dikembalikan
                                     </option>
                                 </select>
-                            </div>
-                            <div class="mb-3">
-                                <form action="/hapus-status/{{ $item->id_peminjaman }}" method="post">
-                                    @csrf
-                                    <label for="" class="form-label d-block">Atau Hapus Status</label>
-                                    <button type="submit" class="btn btn-danger d-block">Hapus Status</button>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -94,8 +89,9 @@
                         <div class="row">
                             <div class="mb-3">
                                 <label for="" class="form-label">Ubah Status</label>
-                                <select class="form-select form-select-lg" name="status_peminjaman" id="">
-                                    <option>Select one</option>
+                                <select required class="form-select form-select-lg" name="status_peminjaman"
+                                    id="">
+
                                     <option value="dipinjam"
                                         {{ $item2->status_peminjaman == 'dipinjam' ? 'selected' : '' }}>Dipinjam
                                     </option>
@@ -104,13 +100,7 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <form action="/hapus-status/{{ $item2->id_peminjaman }}" method="post">
-                                    @csrf
-                                    <label for="" class="form-label d-block">Atau Hapus Status</label>
-                                    <button type="submit" class="btn btn-danger d-block">Hapus Status</button>
-                                </form>
-                            </div>
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -145,8 +135,9 @@
                         <div class="row">
                             <div class="mb-3">
                                 <label for="" class="form-label">Ubah Status</label>
-                                <select class="form-select form-select-lg" name="status_peminjaman" id="">
-                                    <option selected>Select one</option>
+                                <select required class="form-select form-select-lg" name="status_peminjaman"
+                                    id="">
+
                                     <option value="dipinjam"
                                         {{ $item3->status_peminjaman == 'dipinjam' ? 'selected' : '' }}>Dipinjam
                                     </option>
@@ -195,7 +186,7 @@
                         <div class="row">
                             <div class="mb-3">
                                 <label for="defaultSelect" class="form-label">Peminjam</label>
-                                <select id="defaultSelect" name="id_user" class="form-select">
+                                <select required id="defaultSelect" name="id_user" class="form-select">
                                     @foreach ($user as $user1)
                                         <option value="{{ $user1->id }}"
                                             {{ $user1->id == $item->id_user ? 'selected' : '' }}>
@@ -205,15 +196,15 @@
                             </div>
                             <div class="mb-2">
                                 <label for="" class="form-label">Tgl. Peminjaman</label>
-                                <input type="date" class="form-control" value="{{ $item->tanggal_peminjaman }}"
-                                    name="tanggal_peminjaman" id="" aria-describedby="helpId"
-                                    placeholder="..." />
+                                <input required type="date" class="form-control"
+                                    value="{{ $item->tanggal_peminjaman }}" name="tanggal_peminjaman" id=""
+                                    aria-describedby="helpId" placeholder="..." />
                             </div>
                             <div class="mb-2">
                                 <label for="" class="form-label">Tgl. Pengembalian</label>
-                                <input type="date" value="{{ $item->tanggal_pengembalian }}" class="form-control"
-                                    name="tanggal_pengembalian" id="" aria-describedby="helpId"
-                                    placeholder="..." />
+                                <input required type="date" value="{{ $item->tanggal_pengembalian }}"
+                                    class="form-control" name="tanggal_pengembalian" id=""
+                                    aria-describedby="helpId" placeholder="..." />
                             </div>
                         </div>
                     </div>
@@ -250,7 +241,7 @@
                         <div class="row">
                             <div class="mb-3">
                                 <label for="defaultSelect" class="form-label">Peminjam</label>
-                                <select id="defaultSelect" name="id_user" class="form-select">
+                                <select required id="defaultSelect" name="id_user" class="form-select">
                                     @foreach ($user as $user2)
                                         <option value="{{ $user2->id }}"
                                             {{ $user2->id == $item2->id_user ? 'selected' : '' }}>
@@ -260,13 +251,13 @@
                             </div>
                             <div class="mb-2">
                                 <label for="" class="form-label">Tgl. Peminjaman</label>
-                                <input type="date" class="form-control" value="{{ $item2->tanggal_peminjaman }}"
-                                    name="tanggal_peminjaman" id="" aria-describedby="helpId"
-                                    placeholder="..." />
+                                <input required type="date" class="form-control"
+                                    value="{{ $item2->tanggal_peminjaman }}" name="tanggal_peminjaman"
+                                    id="" aria-describedby="helpId" placeholder="..." />
                             </div>
                             <div class="mb-2">
                                 <label for="" class="form-label">Tgl. Pengembalian</label>
-                                <input type="date" value="{{ $item2->tanggal_pengembalian }}"
+                                <input required type="date" value="{{ $item2->tanggal_pengembalian }}"
                                     class="form-control" name="tanggal_pengembalian" id=""
                                     aria-describedby="helpId" placeholder="..." />
                             </div>
@@ -305,7 +296,7 @@
                         <div class="row">
                             <div class="mb-3">
                                 <label for="defaultSelect" class="form-label">Peminjam</label>
-                                <select id="defaultSelect" name="id_user" class="form-select">
+                                <select required id="defaultSelect" name="id_user" class="form-select">
                                     @foreach ($user as $user3)
                                         <option value="{{ $user3->id }}"
                                             {{ $user3->id == $item3->id_user ? 'selected' : '' }}>
@@ -315,13 +306,13 @@
                             </div>
                             <div class="mb-2">
                                 <label for="" class="form-label">Tgl. Peminjaman</label>
-                                <input type="date" class="form-control" value="{{ $item3->tanggal_peminjaman }}"
-                                    name="tanggal_peminjaman" id="" aria-describedby="helpId"
-                                    placeholder="..." />
+                                <input required type="date" class="form-control"
+                                    value="{{ $item3->tanggal_peminjaman }}" name="tanggal_peminjaman"
+                                    id="" aria-describedby="helpId" placeholder="..." />
                             </div>
                             <div class="mb-2">
                                 <label for="" class="form-label">Tgl. Pengembalian</label>
-                                <input type="date" value="{{ $item3->tanggal_pengembalian }}"
+                                <input required type="date" value="{{ $item3->tanggal_pengembalian }}"
                                     class="form-control" name="tanggal_pengembalian" id=""
                                     aria-describedby="helpId" placeholder="..." />
                             </div>

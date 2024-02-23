@@ -16,6 +16,11 @@
                             <label for="defaultFormControlInput" class="form-label">Nama Kategori</label>
                             <input type="text" name="nama_kategori" class="form-control" id="defaultFormControlInput"
                                 placeholder="Ex : Action, Fantasy..." aria-describedby="defaultFormControlHelp">
+                            <div id="defaultFormControlHelp" class="form-text">
+                                @if ($errors->has('nama_kategori'))
+                                    <span class="text-danger">{{ $errors->first('nama_kategori') }}</span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -53,6 +58,11 @@
                                 <input type="text" name="nama_kategori" value="{{ $item->nama_kategori }}"
                                     class="form-control" id="defaultFormControlInput" placeholder="Ex : Medieval.."
                                     aria-describedby="defaultFormControlHelp">
+                                <div id="defaultFormControlHelp" class="form-text">
+                                    @if ($errors->has('nama_kategori'))
+                                        <span class="text-danger">{{ $errors->first('nama_kategori') }}</span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>

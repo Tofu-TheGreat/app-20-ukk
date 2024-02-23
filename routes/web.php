@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing-page.index');
-});
+Route::get('/', [LandingController::class, 'index']);
 
 Route::get('/login-page', [App\Http\Controllers\Auth\AuthController::class, 'login_page'])->name('login-page');
 Route::get('/register-page', [App\Http\Controllers\Auth\AuthController::class, 'register_page'])->name('register-page');
+Route::get('/register-page-admin', [App\Http\Controllers\Auth\AuthController::class, 'register_page_admin'])->name('register-page');
 Route::post('/register-action', [App\Http\Controllers\Auth\AuthController::class, 'register']);
+Route::post('/register-admin-action', [App\Http\Controllers\Auth\AuthController::class, 'register_admin']);
 Route::post('/login-action', [App\Http\Controllers\Auth\AuthController::class, 'login']);
 Route::post('/logout-action', [App\Http\Controllers\Auth\AuthController::class, 'logout']);
 
@@ -36,11 +37,18 @@ Route::post('/peminjaman-steptwo', [App\Http\Controllers\PeminjamanController::c
 Route::get('/delete-peminjaman/{id}', [App\Http\Controllers\PeminjamanController::class, 'destroy'])->name('delete-peminjaman');
 Route::post('/hapus-status/{id}', [App\Http\Controllers\PeminjamanController::class, 'hapus_status']);
 Route::post('/ubah-status/{id}', [App\Http\Controllers\PeminjamanController::class, 'ubah_status']);
+Route::get('/export-peminjaman-no-status', [App\Http\Controllers\PeminjamanController::class, 'export_peminjamannostatus']);
+Route::get('/export-peminjaman-dipinjam', [App\Http\Controllers\PeminjamanController::class, 'export_peminjamandipinjam']);
+Route::get('/export-peminjaman-dikembalikan', [App\Http\Controllers\PeminjamanController::class, 'export_peminjamandikembalikan']);
 
 Route::resource('koleksi', App\Http\Controllers\KoleksiBukuController::class);
 Route::get('/hapus-koleksi/{id}', [App\Http\Controllers\KoleksiBukuController::class, 'destroy']);
 
 Route::resource('ulasan', App\Http\Controllers\UlasanController::class);
+Route::get('/hapus-ulasan/{id}', [App\Http\Controllers\UlasanController::class, 'destroy']);
+
+Route::resource('pembaca', App\Http\Controllers\PembacaController::class);
+Route::get('/hapus-pembaca/{id}', [App\Http\Controllers\PembacaController::class, 'destroy']);
 
 Route::get('/user-table-page', function () {
     return view('data-management.user-pages.user-table');
@@ -75,6 +83,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         return view('data-management.dashboard');
     });
     Route::resource('user', App\Http\Controllers\UserController::class);
+    Route::get('delete-user-action/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
+    Route::get('user-export', [App\Http\Controllers\UserController::class, 'export_user']);
 });
 
 

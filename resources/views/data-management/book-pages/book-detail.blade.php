@@ -34,7 +34,9 @@
                                     <label for="defaultSelect" class="form-label">Kategori Buku</label>
                                     <select disabled id="defaultSelect" name="id_kategori[]" multiple="multiple"
                                         class="form-select">
-                                        <option value="L">Laki-Laki</option>
+                                        @foreach ($kategoribuku as $item)
+                                            <option value="L">{{ $item->kategori->nama_kategori }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-2">
@@ -115,7 +117,7 @@
                                             <li><a class="dropdown-item"
                                                     data-bs-target="#modalEditUlasan{{ $ulasans->id_ulasan }}"
                                                     data-bs-toggle="modal" href="#">Edit Ulasan</a></li>
-                                            <li><a class="dropdown-item" href="#">Hapus Ulasan</a></li>
+                                            <li><a class="dropdown-item" href="/hapus-ulasan/{{ $ulasans->id_ulasan }}">Hapus Ulasan</a></li>
                                         </ul>
                                     </div>
                                 </div>

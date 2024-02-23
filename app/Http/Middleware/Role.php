@@ -14,7 +14,7 @@ class Role
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $roles): Response
+    public function handle(Request $request, Closure $next, string $roles): Response
     {
         if (Auth::user()->role === $roles) {
             return $next($request);

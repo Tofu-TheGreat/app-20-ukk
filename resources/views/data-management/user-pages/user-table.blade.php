@@ -9,6 +9,9 @@
                 </h2>
             </div>
             <a href="{{ route('user.create') }}" class="btn btn-primary mb-3">Tambah</a>
+            <a href="/user-export" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                data-bs-title="Export Data User" class="btn btn-success mb-3"><i
+                    class='bx bxs-spreadsheet'></i></a>
             <a class="btn btn-warning mb-3" data-bs-toggle="collapse" href="#collapseExample" role="button"
                 aria-expanded="false" aria-controls="collapseExample">
                 Tata cara pengisian
@@ -50,10 +53,11 @@
                                                         data-bs-target="#modal-detail-"
                                                         href="javascript:void(0);">Detail</button>
                                                 </li>
-                                                <li><a class="dropdown-item" href="{{ route('user.edit', $item->id) }}">Edit</a>
+                                                <li><a class="dropdown-item"
+                                                        href="{{ route('user.edit', $item->id) }}">Edit</a>
                                                 </li>
                                                 <li><a class="dropdown-item text-danger"
-                                                        href="/delete-user-action/">Delete</a>
+                                                        href="/delete-user-action/{{ $item->id }}">Delete</a>
                                                 </li>
                                             </ul>
                                         </div>

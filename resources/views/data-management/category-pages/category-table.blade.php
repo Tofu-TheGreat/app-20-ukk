@@ -35,7 +35,7 @@
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary dropdown-toggle"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                                Primary
+                                                Action
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" data-bs-toggle="modal"

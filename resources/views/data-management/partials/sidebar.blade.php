@@ -69,7 +69,7 @@
             </a>
         </li>
         <li class="menu-item ">
-            <a href="/pembaca-table-page" class="menu-link">
+            <a href="/pembaca" class="menu-link">
                 <i class='menu-icon tf-icons bx menu-icon tf-icons bxs-user-circle'></i>
                 <div data-i18n="Analytics">Pembaca</div>
             </a>

@@ -27,7 +27,28 @@
             <h2 class="fontbold latestbook mt-5 d-flex justify-content-center">
                 Our Latest<span class="fontpurple ms-2">Book</span>!</h2>
 
-            <div class="col">
+            @foreach ($buku as $item)
+                <div class="col">
+                    <div class="d-flex justify-content-center mt-5">
+                        <div class="card shadow border-0 has-bg-img"
+                            style="width: 18rem; background-image: url({{ asset('book_cover/' . $item->sampul_buku) }})">
+                            <div class="card-body">
+                                <div class="card-body-font mt-5">
+                                    <h5 class="card-title title-book fontbold text-white">{{ $item->judul_buku }}</h5>
+                                    <p class="card-text text-white">{{ $item->sinopsis_buku }}</p>
+                                </div>
+                                @if (Auth::check())
+                                    <a href="{{ route('buku.show', $item->id_buku) }}" class="btn btn-card mt-5">See
+                                        More</a>
+                                @else
+                                    <a href="login-page" class="btn btn-card mt-5">See More</a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+            {{-- <div class="col">
                 <div class="d-flex justify-content-center mt-5 ">
                     <div class="card shadow border-0 has-bg-img cardbook1"
                         style="width: 18rem; background-image: url({{ asset('page_image/canva-brown-rusty-mystery-novel-book-cover-hG1QhA7BiBU.jpg') }})">
@@ -43,22 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="d-flex justify-content-center mt-5">
-                    <div class="card shadow border-0 has-bg-img"
-                        style="width: 18rem; background-image: url({{ asset('page_image/canva-brown-rusty-mystery-novel-book-cover-hG1QhA7BiBU.jpg') }})">
-                        <div class="card-body">
-                            <div class="card-body-font mt-5">
-                                <h5 class="card-title title-book fontbold text-white">Book Name</h5>
-                                <p class="card-text text-white">Lorem ipsum dolor sit, amet consectetur adipisicing
-                                    elit.
-                                    Modi, alias.</p>
-                            </div>
-                            <button class="btn btn-card mt-5">See More</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="col">
                 <div class="d-flex justify-content-center mt-5">
                     <div class="card shadow border-0 has-bg-img cardbook3"
@@ -75,10 +81,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="d-flex justify-content-center">
-            <button class="btn border border-dark mt-5 rounded-5 py-3 morebutton">More</button>
+            @if (Auth::check())
+                <a href="/buku" class="btn border border-dark mt-5 rounded-5 py-3 morebutton">More</a>
+            @else
+                <a href="/login-page" class="btn border border-dark mt-5 rounded-5 py-3 morebutton">More</a>
+            @endif
         </div>
     </div>
 </div>

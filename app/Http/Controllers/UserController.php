@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UserExport;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -28,7 +31,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
 
         $user = User::create([
@@ -39,7 +42,7 @@ class UserController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
             'nomor_telepon' => $request->nomor_telepon,
             'alamat' => $request->alamat,
-            'password'=> Hash::make($request->password),
+            'password' => Hash::make($request->password),
             'role' => $request->role,
         ]);
         return redirect()->intended('user');
@@ -65,12 +68,12 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, string $id)
     {
         $user = User::where('id', $id)->first();
-        if($request->has('password')){
+        if ($request->has('password')) {
             $password = Hash::make($request->password);
-        }else{
+        } else {
             $password = $user->password;
         }
         $user->update([
@@ -92,6 +95,12 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return back();
+    }
+
+    public function export_user(){
+        return Excel::download(new UserExport, 'users.xlsx');
     }
 }

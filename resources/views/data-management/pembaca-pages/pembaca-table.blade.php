@@ -20,30 +20,37 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Username Pembaca</th>
-                                <th scope="col">Tanggal Mulai</th>
+                                <th scope="col">Nomor Telepon</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>20-02-2024</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary dropdown-toggle"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Primary
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-edit"
-                                                    href="javascript:void(0);">Edit</a></li>
-                                            <li><a class="dropdown-item text-danger" href="javascript:void(0);">Delete</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                            <?php
+                            $no = 1;
+                            ?>
+                            @foreach ($pembaca as $item)
+                                <tr>
+                                    <th scope="row">{{ $no++ }}</th>
+                                    <td>{{ $item->user->username }}</td>
+                                    <td>{{ $item->user->nomor_telepon }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" data-bs-toggle="modal"
+                                                        data-bs-target="#modal-edit{{ $item->id_pembaca }}" href="javascript:void(0);">Edit</a>
+                                                </li>
+                                                <li><a class="dropdown-item text-danger"
+                                                        href="hapus-pembaca/{{ $item->id_pembaca }}">Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

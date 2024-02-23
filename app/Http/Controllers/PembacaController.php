@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ulasan;
+use App\Http\Requests\PembacaRequest;
+use App\Models\Pembaca;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class UlasanController extends Controller
+class PembacaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $pembaca = Pembaca::get();
+        $user = User::where('role', 'user')->get();
+        return view('data-management.pembaca-pages.pembaca-table', compact('pembaca', 'user'))->with('title', 'Pembaca Table');
     }
 
     /**
@@ -26,9 +30,9 @@ class UlasanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PembacaRequest $request)
     {
-        $ulasan = Ulasan::create($request->all());
+        $pembaca = Pembaca::create($request->all());
         return back();
     }
 
@@ -51,13 +55,10 @@ class UlasanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PembacaRequest $request, string $id)
     {
-        $ulasan = Ulasan::where('id_ulasan', $id)->update([
-            'id_user'=>$request->id_user,
-            'id_buku'=>$request->id_buku,
-            'ulasan'=>$request->ulasan,
-            'status'=>$request->status,
+        $pembaca = Pembaca::where('id_pembaca', $id)->update([
+            'id_user' => $request->id_user
         ]);
         return back();
     }
@@ -67,7 +68,7 @@ class UlasanController extends Controller
      */
     public function destroy(string $id)
     {
-        $ulasan = Ulasan::where('id_ulasan', $id)->delete();
+        $pembaca = Pembaca::where('id_pembaca', $id)->delete();
         return back();
     }
 }

@@ -1,7 +1,7 @@
 @extends('auth-page.index')
 
 @section('authcontents')
-    <form action="/register-action" method="post">
+    <form action="/register-admin-action" method="post">
         @csrf
         <div class="container-fluid">
             <div class="container">

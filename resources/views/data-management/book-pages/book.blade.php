@@ -34,20 +34,20 @@
                                     <a href="/delete-buku/{{ $item->id_buku }}" class="btn btn-danger ms-2">Hapus</a>
                                 </div>
                                 {{-- @if ($koleksi['id_buku'] == $item->id_buku) --}}
-                                    <div class="col-6 col-md-5 col-sm-auto col-lg-5">
-                                        <form action="{{ route('koleksi.store') }}" method="post">
-                                            @csrf
-                                            <input type="text" name="id_user" value="{{ Auth::user()->id }}" hidden
-                                                id="">
-                                            <input type="text" name="id_buku" value="{{ $item->id_buku }}" hidden
-                                                id="">
-                                            <button type="submit" class="btn btn-info" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" data-bs-custom-class="custom-tooltip"
-                                                data-bs-title="Add to personal collections">
-                                                <i class='bx bxs-star'></i>
-                                            </button>
-                                        </form>
-                                    </div>
+                                <div class="col-6 col-md-5 col-sm-auto col-lg-5">
+                                    <form action="{{ route('koleksi.store') }}" method="post">
+                                        @csrf
+                                        <input type="text" name="id_user" value="{{ Auth::user()->id }}" hidden
+                                            id="">
+                                        <input type="text" name="id_buku" value="{{ $item->id_buku }}" hidden
+                                            id="">
+                                        <button type="submit" class="btn btn-info" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                                            data-bs-title="Add to personal collections">
+                                            <i class='bx bxs-star'></i>
+                                        </button>
+                                    </form>
+                                </div>
                                 {{-- @endif --}}
                             </div>
                         </div>

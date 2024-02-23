@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ulasan;
+use App\Models\Buku;
 use Illuminate\Http\Request;
 
-class UlasanController extends Controller
+class LandingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $buku = Buku::get()
+            ->sortBy('created_at')
+            ->take(3);
+        return view('landing-page/index', compact('buku'));
     }
 
     /**
@@ -28,8 +31,7 @@ class UlasanController extends Controller
      */
     public function store(Request $request)
     {
-        $ulasan = Ulasan::create($request->all());
-        return back();
+        //
     }
 
     /**
@@ -53,13 +55,7 @@ class UlasanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $ulasan = Ulasan::where('id_ulasan', $id)->update([
-            'id_user'=>$request->id_user,
-            'id_buku'=>$request->id_buku,
-            'ulasan'=>$request->ulasan,
-            'status'=>$request->status,
-        ]);
-        return back();
+        //
     }
 
     /**
@@ -67,7 +63,6 @@ class UlasanController extends Controller
      */
     public function destroy(string $id)
     {
-        $ulasan = Ulasan::where('id_ulasan', $id)->delete();
-        return back();
+        //
     }
 }

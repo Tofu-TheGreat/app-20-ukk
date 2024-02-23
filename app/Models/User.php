@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -56,7 +57,10 @@ class User extends Authenticatable
     public function peminjaman(){
         return $this->hasMany(Peminjaman::class, 'id');
     }
-    public function user(){
+    public function ulasan(){
         return $this->hasMany(Ulasan::class, 'id');
+    }
+    public function pembaca(){
+        return $this->hasMany(Pembaca::class, 'id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BukuRequest;
 use App\Models\Buku;
 use App\Models\Kategori;
 use App\Models\KategoriBuku;
@@ -39,7 +40,7 @@ class BukuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BukuRequest $request)
     {
         $req = $request->all();
         $image = $req['sampul_buku'];
@@ -80,7 +81,7 @@ class BukuController extends Controller
         $buku = Buku::where('id_buku', $id)->first();
         $kategori = Kategori::get();
         $ulasan = Ulasan::where('id_buku', $id)->orderBy('created_at')->get();
-        $kategoribuku = KategoriBuku::where('id_buku', $id)->get()->toArray();
+        $kategoribuku = KategoriBuku::where('id_buku', $id)->get();
         $positive = Ulasan::where('id_buku', $id)->where('status', 'up')->count();
         $negative = Ulasan::where('id_buku', $id)->where('status', 'down')->count();
         return view('data-management.book-pages.book-detail', compact(['buku', 'kategoribuku', 'kategori', 'ulasan', 'positive', 'negative']))->with('title', 'Edit Buku');
@@ -98,7 +99,7 @@ class BukuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(BukuRequest $request, $id)
     {
         if ($request->hasFile('sampul_buku')) {
             $req = $request->all();
@@ -126,8 +127,26 @@ class BukuController extends Controller
             } else {
                 $req['tahun_terbit'] = Buku::where('id_buku', $id)->first()->tahun_terbit;
             }
-            $req = Arr::except($req, ['_token', '_method']);
+            $req = Arr::except($req, ['_token', '_method', 'id_kategori']);
             $buku = Buku::where('id_buku', $id)->update($req);
+
+            if ($request->has('id_kategori')) {
+                $id_kat = KategoriBuku::where('id_buku', $id)->delete();
+                $kategori_array = is_array($request->id_kategori) ? $request->id_kategori : [$request->id_kategori];
+                if ($kategori_array) {
+                    foreach ($kategori_array as $items) {
+                        $kategoribuku = KategoriBuku::create([
+                            'id_buku' => $id,
+                            'id_kategori' => $items
+                        ]);
+                    }
+                } else {
+                    $kategoribuku = KategoriBuku::create([
+                        'id_buku' => $id,
+                        'id_kategori' => $req['id_kategori']
+                    ]);
+                }
+            }
         } else {
             $req = $request->all();
             if ($request->tahun_terbit != null) {
@@ -135,8 +154,25 @@ class BukuController extends Controller
             } else {
                 $req['tahun_terbit'] = Buku::where('id_buku', $id)->first()->tahun_terbit;
             }
-            $req = Arr::except($req, ['_token', '_method']);
+            $req = Arr::except($req, ['_token', '_method', 'id_kategori']);
             $buku = Buku::where('id_buku', $id)->update($req);
+            if ($request->has('id_kategori')) {
+                $id_kat = KategoriBuku::where('id_buku', $id)->delete();
+                $kategori_array = is_array($request->id_kategori) ? $request->id_kategori : [$request->id_kategori];
+                if ($kategori_array) {
+                    foreach ($kategori_array as $items) {
+                        $kategoribuku = KategoriBuku::create([
+                            'id_buku' => $id,
+                            'id_kategori' => $items
+                        ]);
+                    }
+                } else {
+                    $kategoribuku = KategoriBuku::create([
+                        'id_buku' => $id,
+                        'id_kategori' => $req['id_kategori']
+                    ]);
+                }
+            }
         }
 
         return back();

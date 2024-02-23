@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="defaultSelect" class="form-label">Buku yang ingin dipinjam</label>
-                                    <select id="defaultSelect" name="id_buku[]" multiple="multiple" class="form-select">
+                                    <select id="defaultSelect" required name="id_buku[]" multiple="multiple" class="form-select">
                                         @foreach ($buku as $item)
                                             <option value="{{ $item->id_buku }}"
                                                 {{ $item->id_buku == $data['id_buku'] ? 'selected' : '' }}>
@@ -39,13 +39,13 @@
                                 </div>
                                 <div class="mb-2">
                                     <label for="" class="form-label">Tgl. Pengembalian</label>
-                                    <input type="date" class="form-control"
+                                    <input type="date" required class="form-control"
                                         name="tanggal_pengembalian" id="" aria-describedby="helpId"
                                         placeholder="..." />
                                 </div>
                                 <div class="mb-2">
                                     <label for="" class="form-label">Jumlah Pinjam (tiap buku)</label>
-                                    <input type="number" value="" name="jumlah_pinjam" class="form-control"
+                                    <input type="number" value="" required name="jumlah_pinjam" class="form-control"
                                        id="" aria-describedby="helpId" placeholder="..." />
                                 </div>
                             </div>
