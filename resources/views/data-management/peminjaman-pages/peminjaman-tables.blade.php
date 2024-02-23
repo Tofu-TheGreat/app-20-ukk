@@ -48,7 +48,13 @@
                                         <td>{{ $item1->tanggal_pengembalian }}</td>
                                         <td>
                                             @foreach ($buku as $buku)
-                                                {{ $buku = $buku->buku->judul_buku }} ,
+                                                @if (!$loop->last)
+                                                    {{ $buku = $buku->buku->judul_buku }},
+                                                @elseif($loop->count === 1)
+                                                    {{ $buku = $buku->buku->judul_buku }}.
+                                                @else
+                                                    {{ $buku = $buku->buku->judul_buku }}.
+                                                @endif
                                             @endforeach
                                         </td>
                                         <td>{{ $jml->jumlah_pinjam ?? 'Jumlah Dikembalikan' }}</td>
@@ -121,7 +127,13 @@
                                                 <td>{{ $item2->tanggal_pengembalian }}</td>
                                                 <td>
                                                     @foreach ($buku as $buku)
-                                                        {{ $buku = $buku->buku->judul_buku }} ,
+                                                        @if (!$loop->last)
+                                                            {{ $buku = $buku->buku->judul_buku }},
+                                                        @elseif($loop->count === 1)
+                                                            {{ $buku = $buku->buku->judul_buku }}.
+                                                        @else
+                                                            {{ $buku = $buku->buku->judul_buku }}.
+                                                        @endif
                                                     @endforeach
                                                 </td>
                                                 <td>{{ $jml->jumlah_pinjam ?? 'Jumlah Dikembalikan' }}</td>
@@ -204,7 +216,13 @@
                                                 <td>{{ $item3->tanggal_pengembalian }}</td>
                                                 <td>
                                                     @foreach ($buku as $buku)
-                                                        {{ $buku = $buku->buku->judul_buku }} ,
+                                                        @if (!$loop->last)
+                                                            {{ $buku = $buku->buku->judul_buku }},
+                                                        @elseif($loop->count === 1)
+                                                            {{ $buku = $buku->buku->judul_buku }}.
+                                                        @else
+                                                            {{ $buku = $buku->buku->judul_buku }}.
+                                                        @endif
                                                     @endforeach
                                                 </td>
                                                 <td>{{ $jml->jumlah_pinjam ?? 'Jumlah Dikembalikan' }}</td>
@@ -292,7 +310,13 @@
                                                 </td>
                                                 <td>
                                                     @foreach ($buku as $buku)
-                                                        {{ $buku = $buku->buku->judul_buku }} ,
+                                                        @if (!$loop->last)
+                                                            {{ $buku = $buku->buku->judul_buku }},
+                                                        @elseif($loop->count === 1)
+                                                            {{ $buku = $buku->buku->judul_buku }}.
+                                                        @else
+                                                            {{ $buku = $buku->buku->judul_buku }}.
+                                                        @endif
                                                     @endforeach
                                                 </td>
                                                 <td>{{ $jml->jumlah_pinjam ?? 'Jumlah Dikembalikan' }}</td>
@@ -349,7 +373,13 @@
                                                 </td>
                                                 <td>
                                                     @foreach ($buku as $buku)
-                                                        {{ $buku = $buku->buku->judul_buku }} ,
+                                                        @if (!$loop->last)
+                                                            {{ $buku = $buku->buku->judul_buku }},
+                                                        @elseif($loop->count === 1)
+                                                            {{ $buku = $buku->buku->judul_buku }}.
+                                                        @else
+                                                            {{ $buku = $buku->buku->judul_buku }}.
+                                                        @endif
                                                     @endforeach
                                                 </td>
                                                 <td>{{ $jml->jumlah_pinjam ?? 'Jumlah Dikembalikan' }}</td>

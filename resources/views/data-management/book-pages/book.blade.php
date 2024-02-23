@@ -112,8 +112,10 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary rounded-circle py-3 px-4 position-fixed bottom-0 end-0 me-5 mb-5"
-            data-bs-toggle="modal" data-bs-target="#modalTambah"><i class="fab fa-plus"></i></button>
+        @if (Auth::user()->role != 'user')
+            <button class="btn btn-primary rounded-circle py-3 px-4 position-fixed bottom-0 end-0 me-5 mb-5"
+                data-bs-toggle="modal" data-bs-target="#modalTambah"><i class="fab fa-plus"></i></button>
+        @endif
     </div>
     @include('data-management.book-pages.book-add')
 @endsection
