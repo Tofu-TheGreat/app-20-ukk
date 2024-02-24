@@ -13,7 +13,7 @@ class LandingController extends Controller
     public function index()
     {
         $buku = Buku::get()
-            ->sortBy('created_at')
+            ->sortBy('created_at', SORT_REGULAR, true)
             ->take(3);
         return view('landing-page/index', compact('buku'));
     }

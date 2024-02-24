@@ -242,6 +242,12 @@
             display: inline-block;
         }
 
+        .textinimg {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
         @keyframes textclip {
             to {
                 background-position: 200% center;

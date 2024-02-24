@@ -35,7 +35,7 @@
                             <div class="card-body">
                                 <div class="card-body-font mt-5">
                                     <h5 class="card-title title-book fontbold text-white">{{ $item->judul_buku }}</h5>
-                                    <p class="card-text text-white">{{ $item->sinopsis_buku }}</p>
+                                    <p class="card-text text-white textinimg">{{ $item->sinopsis_buku }}</p>
                                 </div>
                                 @if (Auth::check())
                                     <a href="{{ route('buku.show', $item->id_buku) }}" class="btn btn-card mt-5">See

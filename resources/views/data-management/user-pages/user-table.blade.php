@@ -9,7 +9,7 @@
                 </h2>
             </div>
             <a href="{{ route('user.create') }}" class="btn btn-primary mb-3">Tambah</a>
-            <a href="/user-export" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+            <a href="user-export" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                 data-bs-title="Export Data User" class="btn btn-success mb-3"><i class='bx bxs-spreadsheet'></i></a>
             <a class="btn btn-warning mb-3" data-bs-toggle="collapse" href="#collapseExample" role="button"
                 aria-expanded="false" aria-controls="collapseExample">

@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col col-md-4"><img class ="img-fluid mt-3"
+                            <div class="col col-md-4"><img class ="img-fluid mt-3 h-75 ms-5"
                                     src="{{ asset('book_cover/' . $buku->sampul_buku) }}" alt="">
                                 <div class="d-flex justify-content-center mt-3">
                                     <i class='bx bxs-up-arrow-circle fs-3 arrowup_colored '>
@@ -72,9 +72,9 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col col-md">
-                                @if ($buku->stok_buku == 0)
+                                @if ($buku->stok_buku == 0 && Auth::user()->role == 'user')
                                     <button type="button" class="btn btn-danger">Stok Habis!</button>
-                                @else
+                                @elseif(Auth::user()->role == 'user')
                                     <button type="button" data-bs-target="#modalPinjam" data-bs-toggle="modal"
                                         class="btn btn-primary">Pinjam</button>
                                 @endif

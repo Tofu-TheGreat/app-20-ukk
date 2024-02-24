@@ -105,13 +105,16 @@
                         </div>
                     </a>
                 </li>
-                <li class="menu-item ">
-                    <a href="/koleksi" class="menu-link">
-                        <div data-i18n="Without menu">
-                            Personal Collections
-                        </div>
-                    </a>
-                </li>
+                @if (Auth::user()->role == 'admin' || Auth::user()->role == 'staff')
+                @else
+                    <li class="menu-item ">
+                        <a href="/koleksi" class="menu-link">
+                            <div data-i18n="Without menu">
+                                Personal Collections
+                            </div>
+                        </a>
+                    </li>
+                @endif
         </li>
         @if (Auth::user()->role == 'admin' || Auth::user()->role == 'staff')
             <li class="menu-item">

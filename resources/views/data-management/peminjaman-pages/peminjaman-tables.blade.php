@@ -233,7 +233,7 @@
                                                             Action
                                                         </button>
                                                         <ul class="dropdown-menu">
-                                                            <li><button class="dropdown-item" data-bs-toggle="modal"
+                                                            {{-- <li><button class="dropdown-item" data-bs-toggle="modal"
                                                                     data-bs-target="#modal-ubah-status-dikembalikan{{ $item3->id_peminjaman }}">Ubah
                                                                     Status</button>
                                                             </li>
@@ -249,7 +249,7 @@
                                                             <li><a class="dropdown-item"
                                                                     data-bs-target="#edit-peminjaman-dikembalikan{{ $item3->id_peminjaman }}"
                                                                     data-bs-toggle="modal">Edit</a>
-                                                            </li>
+                                                            </li> --}}
                                                             <li><a class="dropdown-item text-danger"
                                                                     href="/delete-peminjaman/{{ $item3->id_peminjaman }}">Delete</a>
                                                             </li>
@@ -284,7 +284,7 @@
                                             <th scope="col">Status</th>
                                             <th scope="col">Buku</th>
                                             <th scope="col">Jumlah</th>
-                                            <th scope="col">Cetak Struk</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -320,9 +320,7 @@
                                                     @endforeach
                                                 </td>
                                                 <td>{{ $jml->jumlah_pinjam ?? 'Jumlah Dikembalikan' }}</td>
-                                                <td><button class="btn btn-primary"><i
-                                                            class='bx bxs-printer'></i></button>
-                                                </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>

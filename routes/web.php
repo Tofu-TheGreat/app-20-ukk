@@ -74,7 +74,7 @@ Route::middleware(['auth', 'adminstaff'])->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('user', App\Http\Controllers\UserController::class);
     Route::get('delete-user-action/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
-    Route::get('user-export', [App\Http\Controllers\UserController::class, 'profile_update']);
+    Route::get('user-export', [App\Http\Controllers\UserController::class, 'export_user']);
 });
 Route::middleware(['auth'])->group(function () {
     Route::resource('buku', App\Http\Controllers\BukuController::class);

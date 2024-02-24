@@ -71,7 +71,7 @@ class UserController extends Controller
     public function update(UserRequest $request, string $id)
     {
         $user = User::where('id', $id)->first();
-        if ($request->has('password')) {
+        if ($request->password != null) {
             $password = Hash::make($request->password);
         } else {
             $password = $user->password;
@@ -108,7 +108,7 @@ class UserController extends Controller
     public function profile_update(UserRequest $request, $id)
     {
         $user = User::where('id', $id)->first();
-        if ($request->has('password')) {
+        if ($request->password != null) {
             $password = Hash::make($request->password);
         } else {
             $password = $user->password;
